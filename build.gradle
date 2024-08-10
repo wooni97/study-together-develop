@@ -51,6 +51,8 @@ dependencies {
     implementation 'org.webjars:stomp-websocket:2.3.3'
 
     testRuntimeOnly("com.h2database:h2")
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 }
 
 tasks.named('test') {
