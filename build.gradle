@@ -17,42 +17,50 @@ repositories {
 
 dependencies {
 
+    // Spring Boot Starter Dependencies
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.session:spring-session-core'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'com.h2database:h2'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    // Lombok
     implementation 'org.projectlombok:lombok:1.18.28'
     annotationProcessor 'org.projectlombok:lombok'
-    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.5.2'
-    implementation 'org.springframework.boot:spring-boot-starter-aop'
-
+    // Logging
     implementation 'org.slf4j:slf4j-api:1.7.31'
     implementation 'ch.qos.logback:logback-core:1.2.3'
-
     implementation('ch.qos.logback:logback-classic:1.2.3') {
         exclude group: 'org.slf4j', module: 'slf4j-api'
         exclude group: 'ch.qos.logback', module: 'logback-core'
     }
 
+    // Documentation
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
 
-    implementation 'org.springframework.boot:spring-boot-starter-websocket'
-
-    // jQuery WebJar
+    // WebSocket and WebJars
     implementation 'org.webjars:jquery:3.6.0'
-
-    // SockJS WebJar
     implementation 'org.webjars:sockjs-client:1.0.2'
     implementation 'org.webjars:stomp-websocket:2.3.3'
 
-    testRuntimeOnly("com.h2database:h2")
+    // Databases
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    runtimeOnly 'com.h2database:h2'
+
+    // Test Dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Development-Only Dependencies
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     // Spring Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //Mail
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {
