@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: default, test
+    active: default
 ---
 spring:
   config:
@@ -8,9 +8,10 @@ spring:
       on-profile: default
 
   datasource:
-    jdbc-url: jdbc:h2:tcp://localhost:9093/~/study_together_db
-    driver-class-name: org.h2.Driver
-    username: sa
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db-ohss6-kr.vpc-pub-cdb.ntruss.com:3306/study-together-db?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
+    username: application
+    password: application123!
   sql:
     init:
       mode: always
@@ -24,35 +25,59 @@ spring:
         springframework:
           nodeValue: INFO
           web: DEBUG
+
+  mail:
+    host: stmp.gmail.com
+    port: 587
+    username: studytogether756@gmail.com
+    password: oqqd hqvo fgca owfn
+    properties:
+      mail.smtp.debug: true
+      mail.smtp.connection-timeout: 1000
+      mail.starttls.enable: true
+      mail.smtp.auth: true
+
 springdoc:
   swagger-ui:
     operations-sorter: method
 ---
 
 spring:
-  datasource:
-    driver-class-name: org.h2.Driver
-    username: sa
-    url: jdbc:h2:mem:STUDY_TOGETHER_TEST_DB
-    h2:
-      console:
-        enabled: 'true'
-  sql:
-    init:
-      mode: always
-      data-locations: classpath:schema.sql
-
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-
-  logging:
-    level:
-      org:
-        springframework:
-          nodeValue: INFO
-          web: DEBUG
   config:
     activate:
       on-profile: test
+
+    datasource:
+      driver-class-name: org.h2.Driver
+      username: sa
+      url: jdbc:h2:mem:STUDY_TOGETHER_TEST_DB
+      h2:
+        console:
+          enabled: 'true'
+    sql:
+      init:
+        mode: always
+        # data-locations: classpath:schema.sql
+
+    thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+
+    logging:
+      level:
+        org:
+          springframework:
+            nodeValue: INFO
+            web: DEBUG
+
+    mail:
+      host: stmp.gmail.com
+      port: 587
+      username: studytogether756@gmail.com
+      password: oqqd hqvo fgca owfn
+      properties:
+        mail.smtp.debug: true
+        mail.smtp.connectiontimeout: 1000
+        mail.starttls.enable: true
+        mail.smtp.auth: true
 
