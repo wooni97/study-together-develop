@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class MemberV2 {
-    private int id;
+    private long id;
     private final String email;
     private boolean emailAuthenticated;
     private final String password;
