@@ -20,4 +20,8 @@ public class MemberV2 {
     public static MemberV2 createNewMember(String email, String password, String nickname) {
         return new MemberV2(email, password, nickname);
     }
+
+    public void changeToEmailAuthenticated() {
+        this.emailAuthenticated = true;
+    }
 }
