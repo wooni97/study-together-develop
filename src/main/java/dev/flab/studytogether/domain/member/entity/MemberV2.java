@@ -6,13 +6,13 @@ import lombok.Getter;
 public class MemberV2 {
     private int id;
     private final String email;
-    private final boolean emailVerified;
+    private boolean emailAuthenticated;
     private final String password;
     private final String nickname;
 
     private MemberV2(String email, String password, String nickname) {
         this.email = email;
-        this.emailVerified = false;
+        this.emailAuthenticated = false;
         this.password = password;
         this.nickname = nickname;
     }
