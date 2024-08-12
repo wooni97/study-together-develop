@@ -27,14 +27,14 @@ spring:
           web: DEBUG
 
   mail:
-    host: stmp.gmail.com
+    host: smtp.gmail.com
     port: 587
     username: studytogether756@gmail.com
     password: oqqd hqvo fgca owfn
     properties:
       mail.smtp.debug: true
       mail.smtp.connection-timeout: 1000
-      mail.starttls.enable: true
+      mail.smtp.starttls.enable: true
       mail.smtp.auth: true
 
 springdoc:
@@ -71,7 +71,7 @@ spring:
             web: DEBUG
 
     mail:
-      host: stmp.gmail.com
+      host: smtp.gmail.com
       port: 587
       username: studytogether756@gmail.com
       password: oqqd hqvo fgca owfn
