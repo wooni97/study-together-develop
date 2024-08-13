@@ -2,6 +2,8 @@ package dev.flab.studytogether.domain.member.service;
 
 import dev.flab.studytogether.domain.member.entity.EmailAuthentication;
 import dev.flab.studytogether.domain.member.entity.MemberV2;
+import dev.flab.studytogether.domain.member.exception.LinkExpiredException;
+import dev.flab.studytogether.domain.member.exception.LinkNotValidException;
 import dev.flab.studytogether.domain.member.exception.MemberEmailAddressExistsException;
 import dev.flab.studytogether.domain.member.exception.MemberNicknameExistsException;
 import dev.flab.studytogether.domain.member.repository.EmailAuthenticationRepository;
@@ -53,4 +55,29 @@ public class MemberV2Service {
 
         return newMember;
     }
+
+    @Transactional
+    public void emailAddressAuthenticate(String email, String authKey) {
+        MemberV2 member = memberV2Repository.findByEmail(email)
+                .orElseThrow(LinkNotValidException::new);
+
+        // 이미 인증 완료된 사용자
+        if(member.isEmailAuthenticated()) {
+            throw new LinkNotValidException();
+        }
+
+        EmailAuthentication emailConfirm = emailAuthenticationRepository.findByEmailAndAuthKey(email, authKey)
+                .orElseThrow(LinkNotValidException::new);
+
+        // 링크 유효기간이 만료됐을 경우
+        if(emailConfirm.isExpired()) {
+            throw new LinkExpiredException();
+        }
+
+        member.changeToEmailAuthenticated();
+
+        memberV2Repository.update(member);
+        emailAuthenticationRepository.update(emailConfirm);
+    }
+
 }
