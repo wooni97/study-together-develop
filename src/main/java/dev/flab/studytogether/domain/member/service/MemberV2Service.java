@@ -2,8 +2,8 @@ package dev.flab.studytogether.domain.member.service;
 
 import dev.flab.studytogether.domain.member.entity.EmailAuthentication;
 import dev.flab.studytogether.domain.member.entity.MemberV2;
-import dev.flab.studytogether.domain.member.exception.MemberEmailAddressExistsException;
-import dev.flab.studytogether.domain.member.exception.MemberNicknameExistsException;
+import dev.flab.studytogether.domain.member.exception.DuplicateEmailAddressException;
+import dev.flab.studytogether.domain.member.exception.DuplicateNicknameException;
 import dev.flab.studytogether.domain.member.repository.EmailAuthenticationRepository;
 import dev.flab.studytogether.domain.member.repository.MemberV2Repository;
 import dev.flab.studytogether.utils.RandomUtil;
@@ -31,11 +31,11 @@ public class MemberV2Service {
     @Transactional
     public MemberV2 signUp(String email, String password, String nickname) {
         if(memberV2Repository.isEmailExists(email)) {
-            throw new MemberEmailAddressExistsException();
+            throw new DuplicateEmailAddressException();
         }
 
         if(memberV2Repository.isNicknameExists(nickname)) {
-            throw new MemberNicknameExistsException();
+            throw new DuplicateNicknameException();
         }
 
         MemberV2 newMember = MemberV2.createNewMember(
