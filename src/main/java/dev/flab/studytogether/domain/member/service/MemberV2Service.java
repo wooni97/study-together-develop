@@ -74,7 +74,7 @@ public class MemberV2Service {
         member.changeToEmailAuthenticated();
 
         memberV2Repository.update(member);
-        emailAuthenticationRepository.update(emailConfirm);
+        emailAuthenticationRepository.delete(emailConfirm);
     }
 
 }
