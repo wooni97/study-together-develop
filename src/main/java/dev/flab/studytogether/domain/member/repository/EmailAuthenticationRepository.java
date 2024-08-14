@@ -9,4 +9,6 @@ public interface EmailAuthenticationRepository {
     EmailAuthentication save(EmailAuthentication emailConfirm);
     Optional<EmailAuthentication> findByEmailAndAuthKey(String email, String authKey);
     EmailAuthentication update(EmailAuthentication emailConfirm);
+    Optional<EmailAuthentication> findByEmail(String email);
+    void delete(EmailAuthentication emailAuthentication);
 }
