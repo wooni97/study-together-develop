@@ -21,7 +21,10 @@ public class MemberV2 {
         return new MemberV2(email, password, nickname);
     }
 
-    public void changeToEmailAuthenticated() {
+    public void authenticateEmail() {
+        if (emailAuthenticated) {
+            throw new EmailAlreadyAuthenticatedException();
+        }
         this.emailAuthenticated = true;
     }
 }

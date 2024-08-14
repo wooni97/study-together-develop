@@ -58,11 +58,6 @@ public class MemberV2Service {
         MemberV2 member = memberV2Repository.findByEmail(email)
                 .orElseThrow(() -> new MemberNotFoundException("이메일 인증이 필요한 해당 회원이 존재하지 않습니다."));
 
-        // 이미 인증 완료된 사용자
-        if(member.isEmailAuthenticated()) {
-            throw new LinkNotValidException();
-        }
-
         EmailAuthentication emailConfirm = emailAuthenticationRepository.findByEmailAndAuthKey(email, authKey)
                 .orElseThrow(LinkNotValidException::new);
 
@@ -71,7 +66,7 @@ public class MemberV2Service {
             throw new LinkExpiredException();
         }
 
-        member.changeToEmailAuthenticated();
+        member.authenticateEmail();
 
         memberV2Repository.update(member);
         emailAuthenticationRepository.delete(emailConfirm);
