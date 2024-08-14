@@ -5,6 +5,8 @@ import dev.flab.studytogether.domain.member.entity.MemberV2;
 import dev.flab.studytogether.domain.member.exception.DuplicateEmailAddressException;
 import dev.flab.studytogether.domain.member.exception.DuplicateNicknameException;
 import dev.flab.studytogether.domain.member.exception.EmailAlreadyAuthenticatedException;
+import dev.flab.studytogether.domain.member.exception.EmailAuthenticationExpiredException;
+import dev.flab.studytogether.domain.member.exception.EmailAuthenticationNotFoundException;
 import dev.flab.studytogether.domain.member.exception.MemberNotFoundException;
 import dev.flab.studytogether.domain.member.repository.EmailAuthenticationRepository;
 import dev.flab.studytogether.domain.member.repository.MemberV2Repository;
@@ -54,6 +56,27 @@ public class MemberV2Service {
 
         return newMember;
     }
+
+    @Transactional
+    public void emailAddressAuthenticate(String email, String authKey) {
+        MemberV2 member = memberV2Repository.findByEmail(email)
+                .orElseThrow(() -> new MemberNotFoundException("이메일 인증이 필요한 해당 회원이 존재하지 않습니다."));
+
+        EmailAuthentication emailConfirm = emailAuthenticationRepository.findByEmailAndAuthKey(email, authKey)
+                .orElseThrow(EmailAuthenticationNotFoundException::new);
+
+        // EmailAuthentication이 만료됐을 경우
+        if(emailConfirm.isExpired()) {
+            throw new EmailAuthenticationExpiredException();
+        }
+
+        member.authenticateEmail();
+
+        memberV2Repository.update(member);
+        emailAuthenticationRepository.delete(emailConfirm);
+    }
+
+}
 
     public EmailAuthentication createEmailAuthentication(String email) {
         // 이미 이메일 인증이 된 사용자일 경우
