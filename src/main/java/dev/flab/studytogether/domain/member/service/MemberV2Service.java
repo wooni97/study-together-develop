@@ -2,10 +2,7 @@ package dev.flab.studytogether.domain.member.service;
 
 import dev.flab.studytogether.domain.member.entity.EmailAuthentication;
 import dev.flab.studytogether.domain.member.entity.MemberV2;
-import dev.flab.studytogether.domain.member.exception.LinkExpiredException;
-import dev.flab.studytogether.domain.member.exception.LinkNotValidException;
-import dev.flab.studytogether.domain.member.exception.MemberEmailAddressExistsException;
-import dev.flab.studytogether.domain.member.exception.MemberNicknameExistsException;
+import dev.flab.studytogether.domain.member.exception.*;
 import dev.flab.studytogether.domain.member.repository.EmailAuthenticationRepository;
 import dev.flab.studytogether.domain.member.repository.MemberV2Repository;
 import dev.flab.studytogether.utils.RandomUtil;
@@ -59,7 +56,7 @@ public class MemberV2Service {
     @Transactional
     public void emailAddressAuthenticate(String email, String authKey) {
         MemberV2 member = memberV2Repository.findByEmail(email)
-                .orElseThrow(LinkNotValidException::new);
+                .orElseThrow(() -> new MemberNotFoundException("이메일 인증이 필요한 해당 회원이 존재하지 않습니다."));
 
         // 이미 인증 완료된 사용자
         if(member.isEmailAuthenticated()) {
