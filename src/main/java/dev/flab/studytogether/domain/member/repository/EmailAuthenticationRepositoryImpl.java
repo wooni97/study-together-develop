@@ -10,7 +10,7 @@ import java.util.Optional;
 public class EmailAuthenticationRepositoryImpl implements EmailAuthenticationRepository{
     @Override
     public EmailAuthentication save(EmailAuthentication emailConfirm) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -19,7 +19,7 @@ public class EmailAuthenticationRepositoryImpl implements EmailAuthenticationRep
     }
 
     @Override
-    public List<EmailAuthentication> findByEmail(String email) {
+    public Optional<EmailAuthentication> findByEmail(String email) {
         throw new UnsupportedOperationException();
 
     }
