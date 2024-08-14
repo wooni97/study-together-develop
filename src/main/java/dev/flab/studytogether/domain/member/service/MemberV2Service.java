@@ -61,9 +61,9 @@ public class MemberV2Service {
         EmailAuthentication emailConfirm = emailAuthenticationRepository.findByEmailAndAuthKey(email, authKey)
                 .orElseThrow(LinkNotValidException::new);
 
-        // 링크 유효기간이 만료됐을 경우
+        // EmailAuthentication이 만료됐을 경우
         if(emailConfirm.isExpired()) {
-            throw new LinkExpiredException();
+            throw new EmailAuthenticationExpiredException();
         }
 
         member.authenticateEmail();
