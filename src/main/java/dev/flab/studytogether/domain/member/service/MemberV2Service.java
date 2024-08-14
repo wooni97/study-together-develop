@@ -5,6 +5,7 @@ import dev.flab.studytogether.domain.member.entity.MemberV2;
 import dev.flab.studytogether.domain.member.exception.DuplicateEmailAddressException;
 import dev.flab.studytogether.domain.member.exception.DuplicateNicknameException;
 import dev.flab.studytogether.domain.member.exception.EmailAlreadyAuthenticatedException;
+import dev.flab.studytogether.domain.member.exception.MemberNotFoundException;
 import dev.flab.studytogether.domain.member.repository.EmailAuthenticationRepository;
 import dev.flab.studytogether.domain.member.repository.MemberV2Repository;
 import dev.flab.studytogether.utils.RandomUtil;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberV2Service {
@@ -56,7 +58,12 @@ public class MemberV2Service {
 
     public EmailAuthentication createEmailAuthentication(String email) {
         // 이미 이메일 인증이 된 사용자일 경우
-        if(memberV2Repository.findByEmail(email).get().isEmailAuthenticated()) {
+        Optional<MemberV2> member = memberV2Repository.findByEmail(email);
+        if(member.isEmpty()) {
+            throw new MemberNotFoundException("존재하지 않는 회원입니다.");
+        }
+
+        if(member.get().isEmailAuthenticated()) {
             throw new EmailAlreadyAuthenticatedException();
         }
 
