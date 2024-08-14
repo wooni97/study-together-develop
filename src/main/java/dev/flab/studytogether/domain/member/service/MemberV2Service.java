@@ -76,10 +76,8 @@ public class MemberV2Service {
         emailAuthenticationRepository.delete(emailConfirm);
     }
 
-}
 
     public EmailAuthentication createEmailAuthentication(String email) {
-        // 이미 이메일 인증이 된 사용자일 경우
         Optional<MemberV2> member = memberV2Repository.findByEmail(email);
         if(member.isEmpty()) {
             throw new MemberNotFoundException("존재하지 않는 회원입니다.");
@@ -92,14 +90,12 @@ public class MemberV2Service {
         // 기존에 EmailAuthentication 만료 시킨 후 재발급
         if(emailAuthenticationRepository.findByEmail(email).isPresent()) {
             EmailAuthentication existingEmailAuthentication = emailAuthenticationRepository.findByEmail(email).get();
-            EmailAuthentication reIssuedEmailAuthentication = EmailAuthentication.reIssueEmailAuthentication(
-                    existingEmailAuthentication.getId(),
-                    existingEmailAuthentication.getEmail()
-            );
 
-            emailAuthenticationRepository.update(reIssuedEmailAuthentication);
+            existingEmailAuthentication.reIssueAuthKey();
 
-            return reIssuedEmailAuthentication;
+            emailAuthenticationRepository.update(existingEmailAuthentication);
+
+            return existingEmailAuthentication;
         }
 
         EmailAuthentication emailAuthentication = EmailAuthentication.issueNewEmailAuthentication(email);
