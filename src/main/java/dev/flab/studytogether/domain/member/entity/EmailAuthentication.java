@@ -11,24 +11,35 @@ public class EmailAuthentication {
     private final String email;
     private final String authKey;
     private final LocalDateTime createdAt;
-    private final LocalDateTime expiredDateTime;
+    private final LocalDateTime validUntil;
+    private boolean isExpired;
 
     public EmailAuthentication(String email, String token) {
         this.email = email;
         this.authKey = token;
         this.createdAt = LocalDateTime.now();
-        this.expiredDateTime = createdAt.plusDays(VALID_TIME);
+        this.validUntil = createdAt.plusDays(VALID_TIME);
+        this.isExpired = false;
     }
 
-    public EmailAuthentication(long id, String email, String token, LocalDateTime createdAt, LocalDateTime expiredDateTime, boolean used) {
+    public EmailAuthentication(long id, String email, String authKey, LocalDateTime createdAt, LocalDateTime expiredDateTime, boolean isExpired) {
         this.id = id;
         this.email = email;
-        this.authKey = token;
+        this.authKey = authKey;
         this.createdAt = createdAt;
-        this.expiredDateTime = expiredDateTime;
+        this.validUntil = expiredDateTime;
+        this.isExpired = isExpired;
     }
 
     public boolean isExpired() {
-        return LocalDateTime.now().isAfter(expiredDateTime);
+        if(isExpired) return true;
+
+        if(LocalDateTime.now().isAfter(validUntil)) return true;
+
+        return false;
+    }
+
+    public void expire() {
+        this.isExpired = true;
     }
 }
