@@ -10,9 +10,9 @@ public class EmailAuthentication {
 
     private long id;
     private final String email;
-    private final String authKey;
-    private final LocalDateTime createdAt;
-    private final LocalDateTime validUntil;
+    private String authKey;
+    private LocalDateTime createdAt;
+    private LocalDateTime validUntil;
     private boolean isExpired;
 
     private EmailAuthentication(String email, String authKey) {
@@ -57,7 +57,9 @@ public class EmailAuthentication {
         return new EmailAuthentication(email, RandomUtil.generateRandomToken(16));
     }
 
-    public static EmailAuthentication reIssueEmailAuthentication(long id, String email) {
-        return new EmailAuthentication(id, email, RandomUtil.generateRandomToken(16));
+    public void reIssueAuthKey() {
+        this.authKey = RandomUtil.generateRandomToken(16);
+        this.validUntil = LocalDateTime.now().plusDays(VALID_TIME);
+        this.isExpired = false;
     }
 }
