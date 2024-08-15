@@ -1,5 +1,6 @@
 package dev.flab.studytogether.domain.member.entity;
 
+import dev.flab.studytogether.utils.RandomUtil;
 import lombok.Getter;
 import java.time.LocalDateTime;
 
@@ -9,14 +10,23 @@ public class EmailAuthentication {
 
     private long id;
     private final String email;
-    private final String authKey;
-    private final LocalDateTime createdAt;
-    private final LocalDateTime validUntil;
+    private String authKey;
+    private LocalDateTime createdAt;
+    private LocalDateTime validUntil;
     private boolean isExpired;
 
-    public EmailAuthentication(String email, String token) {
+    private EmailAuthentication(String email, String authKey) {
         this.email = email;
-        this.authKey = token;
+        this.authKey = authKey;
+        this.createdAt = LocalDateTime.now();
+        this.validUntil = createdAt.plusDays(VALID_TIME);
+        this.isExpired = false;
+    }
+
+    private EmailAuthentication(long id, String email, String authKey) {
+        this.id = id;
+        this.email = email;
+        this.authKey = authKey;
         this.createdAt = LocalDateTime.now();
         this.validUntil = createdAt.plusDays(VALID_TIME);
         this.isExpired = false;
@@ -41,5 +51,15 @@ public class EmailAuthentication {
 
     public void expire() {
         this.isExpired = true;
+    }
+
+    public static EmailAuthentication issueNewEmailAuthentication(String email) {
+        return new EmailAuthentication(email, RandomUtil.generateRandomToken(16));
+    }
+
+    public void reIssueAuthKey() {
+        this.authKey = RandomUtil.generateRandomToken(16);
+        this.validUntil = LocalDateTime.now().plusDays(VALID_TIME);
+        this.isExpired = false;
     }
 }

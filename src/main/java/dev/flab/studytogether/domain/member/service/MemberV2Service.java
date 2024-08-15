@@ -5,6 +5,8 @@ import dev.flab.studytogether.domain.member.entity.MemberV2;
 import dev.flab.studytogether.domain.member.exception.DuplicateEmailAddressException;
 import dev.flab.studytogether.domain.member.exception.DuplicateNicknameException;
 import dev.flab.studytogether.domain.member.exception.EmailAlreadyAuthenticatedException;
+import dev.flab.studytogether.domain.member.exception.EmailAuthenticationExpiredException;
+import dev.flab.studytogether.domain.member.exception.EmailAuthenticationNotFoundException;
 import dev.flab.studytogether.domain.member.exception.MemberNotFoundException;
 import dev.flab.studytogether.domain.member.repository.EmailAuthenticationRepository;
 import dev.flab.studytogether.domain.member.repository.MemberV2Repository;
@@ -12,7 +14,9 @@ import dev.flab.studytogether.utils.RandomUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+
 import java.util.Optional;
 
 @Service
@@ -56,8 +60,27 @@ public class MemberV2Service {
         return newMember;
     }
 
+    @Transactional
+    public void emailAddressAuthenticate(String email, String authKey) {
+        MemberV2 member = memberV2Repository.findByEmail(email)
+                .orElseThrow(() -> new MemberNotFoundException("이메일 인증이 필요한 해당 회원이 존재하지 않습니다."));
+
+        EmailAuthentication emailConfirm = emailAuthenticationRepository.findByEmailAndAuthKey(email, authKey)
+                .orElseThrow(EmailAuthenticationNotFoundException::new);
+
+        // EmailAuthentication이 만료됐을 경우
+        if(emailConfirm.isExpired()) {
+            throw new EmailAuthenticationExpiredException();
+        }
+
+        member.authenticateEmail();
+
+        memberV2Repository.update(member);
+        emailAuthenticationRepository.delete(emailConfirm);
+    }
+
+
     public EmailAuthentication createEmailAuthentication(String email) {
-        // 이미 이메일 인증이 된 사용자일 경우
         Optional<MemberV2> member = memberV2Repository.findByEmail(email);
         if(member.isEmpty()) {
             throw new MemberNotFoundException("존재하지 않는 회원입니다.");
@@ -67,20 +90,18 @@ public class MemberV2Service {
             throw new EmailAlreadyAuthenticatedException();
         }
 
-        // 기존에 유효한 EmailAuthentication 만료 시킴
-        List<EmailAuthentication> existingEmailAuthentications = emailAuthenticationRepository.findByEmail(email);
-        if(!existingEmailAuthentications.isEmpty()) {
-            existingEmailAuthentications.stream()
-                    .filter(emailAuthentication -> !emailAuthentication.isExpired())
-                    .forEach(emailAuthentication -> {
-                        emailAuthentication.expire();
-                        emailAuthenticationRepository.update(emailAuthentication);
-                    });
+        // 기존에 EmailAuthentication 만료 시킨 후 재발급
+        if(emailAuthenticationRepository.findByEmail(email).isPresent()) {
+            EmailAuthentication existingEmailAuthentication = emailAuthenticationRepository.findByEmail(email).get();
+
+            existingEmailAuthentication.reIssueAuthKey();
+
+            emailAuthenticationRepository.update(existingEmailAuthentication);
+
+            return existingEmailAuthentication;
         }
 
-        // 새 authKey 발급
-        String authKey = RandomUtil.generateRandomToken(16);
-        EmailAuthentication emailAuthentication = new EmailAuthentication(email, authKey);
+        EmailAuthentication emailAuthentication = EmailAuthentication.issueNewEmailAuthentication(email);
         emailAuthenticationRepository.save(emailAuthentication);
 
         return emailAuthentication;
