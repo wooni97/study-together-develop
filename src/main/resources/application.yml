@@ -36,6 +36,13 @@ spring:
       mail.smtp.connection-timeout: 1000
       mail.smtp.starttls.enable: true
       mail.smtp.auth: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
 
 springdoc:
   swagger-ui:
@@ -81,3 +88,10 @@ spring:
         mail.starttls.enable: true
         mail.smtp.auth: true
 
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
