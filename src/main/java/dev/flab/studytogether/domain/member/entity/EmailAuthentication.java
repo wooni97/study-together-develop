@@ -1,19 +1,30 @@
 package dev.flab.studytogether.domain.member.entity;
 
+import dev.flab.studytogether.domain.member.repository.EmailAuthenticationRepository;
 import dev.flab.studytogether.utils.RandomUtil;
 import lombok.Getter;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+@Entity
 @Getter
 public class EmailAuthentication {
     public static final long VALID_TIME = 1L;
 
-    private long id;
-    private final String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String email;
     private String authKey;
     private LocalDateTime createdAt;
     private LocalDateTime validUntil;
     private boolean isExpired;
+
+    protected EmailAuthentication() {}
 
     private EmailAuthentication(String email, String authKey) {
         this.email = email;
