@@ -1,36 +1,31 @@
 package dev.flab.studytogether.domain.member.repository;
 
 import dev.flab.studytogether.domain.member.entity.EmailAuthentication;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 import java.util.Optional;
-// TODO 추후 구현 예정
+
 @Repository
+@RequiredArgsConstructor
 public class EmailAuthenticationRepositoryImpl implements EmailAuthenticationRepository{
+    private final EmailAuthenticationJpaRepository emailAuthenticationJpaRepository;
     @Override
-    public EmailAuthentication save(EmailAuthentication emailConfirm) {
-        throw new UnsupportedOperationException();
+    public EmailAuthentication save(EmailAuthentication emailAuthentication) {
+        return emailAuthenticationJpaRepository.save(emailAuthentication);
     }
 
     @Override
     public Optional<EmailAuthentication> findByEmailAndAuthKey(String email, String authKey) {
-        throw new UnsupportedOperationException();
+        return emailAuthenticationJpaRepository.findByEmailAndAuthKey(email, authKey);
     }
 
     @Override
     public Optional<EmailAuthentication> findByEmail(String email) {
-        throw new UnsupportedOperationException();
-
+        return emailAuthenticationJpaRepository.findByEmail(email);
     }
 
     @Override
     public void delete(EmailAuthentication emailAuthentication) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public EmailAuthentication update(EmailAuthentication emailConfirm) {
-        throw new UnsupportedOperationException();
+        emailAuthenticationJpaRepository.delete(emailAuthentication);
     }
 }
