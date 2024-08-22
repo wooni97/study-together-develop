@@ -1,14 +1,21 @@
 package dev.flab.studytogether.domain.member.entity;
 
+import dev.flab.studytogether.domain.member.exception.EmailAlreadyAuthenticatedException;
 import lombok.Getter;
+import javax.persistence.*;
 
+@Entity
 @Getter
 public class MemberV2 {
-    private long id;
-    private final String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String email;
     private boolean emailAuthenticated;
-    private final String password;
-    private final String nickname;
+    private String password;
+    private String nickname;
+
+    protected MemberV2() {}
 
     private MemberV2(String email, String password, String nickname) {
         this.email = email;

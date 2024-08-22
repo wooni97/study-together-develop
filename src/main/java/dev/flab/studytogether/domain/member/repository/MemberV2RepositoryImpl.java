@@ -1,36 +1,33 @@
 package dev.flab.studytogether.domain.member.repository;
 
 import dev.flab.studytogether.domain.member.entity.MemberV2;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-
-// TODO 추후 구현 예정
 @Repository
+@RequiredArgsConstructor
 public class MemberV2RepositoryImpl implements MemberV2Repository{
+    private final MemberV2JpaRepository memberV2JpaRepository;
+
     @Override
     public MemberV2 save(MemberV2 member) {
-        throw new UnsupportedOperationException();
+         return memberV2JpaRepository.save(member);
     }
 
     @Override
     public boolean isEmailExists(String email) {
-        throw new UnsupportedOperationException();
+        return memberV2JpaRepository.existsByEmail(email);
     }
 
     @Override
     public boolean isNicknameExists(String nickname) {
-        throw new UnsupportedOperationException();
+        return memberV2JpaRepository.existsByNickname(nickname);
     }
 
     @Override
     public Optional<MemberV2> findByEmail(String email) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public MemberV2 update(MemberV2 member) {
-        throw new UnsupportedOperationException();
+       return memberV2JpaRepository.findByEmail(email);
     }
 }

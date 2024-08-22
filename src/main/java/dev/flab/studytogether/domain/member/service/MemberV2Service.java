@@ -10,31 +10,20 @@ import dev.flab.studytogether.domain.member.exception.EmailAuthenticationNotFoun
 import dev.flab.studytogether.domain.member.exception.MemberNotFoundException;
 import dev.flab.studytogether.domain.member.repository.EmailAuthenticationRepository;
 import dev.flab.studytogether.domain.member.repository.MemberV2Repository;
-import dev.flab.studytogether.utils.RandomUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MemberV2Service {
     private final MemberV2Repository memberV2Repository;
     private final EmailAuthenticationRepository emailAuthenticationRepository;
     private final NotificationService notificationService;
     private final PasswordEncoder passwordEncoder;
 
-    public MemberV2Service(MemberV2Repository memberV2Repository,
-                           EmailAuthenticationRepository emailAuthenticationRepository,
-                           NotificationService notificationService,
-                           PasswordEncoder passwordEncoder) {
-        this.memberV2Repository = memberV2Repository;
-        this.emailAuthenticationRepository = emailAuthenticationRepository;
-        this.notificationService = notificationService;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Transactional
     public MemberV2 signUp(String email, String password, String nickname) {
@@ -42,7 +31,7 @@ public class MemberV2Service {
             throw new DuplicateEmailAddressException();
         }
 
-        if(memberV2Repository.isNicknameExists(nickname)) {
+        if(memberV2Repository.isEmailExists(nickname)) {
             throw new DuplicateNicknameException();
         }
 
@@ -75,7 +64,6 @@ public class MemberV2Service {
 
         member.authenticateEmail();
 
-        memberV2Repository.update(member);
         emailAuthenticationRepository.delete(emailConfirm);
     }
 
@@ -95,8 +83,6 @@ public class MemberV2Service {
             EmailAuthentication existingEmailAuthentication = emailAuthenticationRepository.findByEmail(email).get();
 
             existingEmailAuthentication.reIssueAuthKey();
-
-            emailAuthenticationRepository.update(existingEmailAuthentication);
 
             return existingEmailAuthentication;
         }
