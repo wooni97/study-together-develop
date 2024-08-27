@@ -66,7 +66,7 @@ class MemberV2JpaRepositoryTest {
         memberV2JpaRepository.save(newMember);
 
         //when, then
-        assertThat(memberV2JpaRepository.existsByNickname(newMember.getEmail()))
+        assertThat(memberV2JpaRepository.existsByNickname(newMember.getNickname()))
                 .isTrue();
     }
 
