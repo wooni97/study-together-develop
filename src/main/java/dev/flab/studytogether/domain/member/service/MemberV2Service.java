@@ -2,12 +2,7 @@ package dev.flab.studytogether.domain.member.service;
 
 import dev.flab.studytogether.domain.member.entity.EmailAuthentication;
 import dev.flab.studytogether.domain.member.entity.MemberV2;
-import dev.flab.studytogether.domain.member.exception.DuplicateEmailAddressException;
-import dev.flab.studytogether.domain.member.exception.DuplicateNicknameException;
-import dev.flab.studytogether.domain.member.exception.EmailAlreadyAuthenticatedException;
-import dev.flab.studytogether.domain.member.exception.EmailAuthenticationExpiredException;
-import dev.flab.studytogether.domain.member.exception.EmailAuthenticationNotFoundException;
-import dev.flab.studytogether.domain.member.exception.MemberNotFoundException;
+import dev.flab.studytogether.domain.member.exception.*;
 import dev.flab.studytogether.domain.member.repository.EmailAuthenticationRepository;
 import dev.flab.studytogether.domain.member.repository.MemberV2Repository;
 import lombok.RequiredArgsConstructor;
@@ -91,5 +86,16 @@ public class MemberV2Service {
         emailAuthenticationRepository.save(emailAuthentication);
 
         return emailAuthentication;
+    }
+
+    public MemberV2 login(String email, String password) {
+        MemberV2 member = memberV2Repository.findByEmail(email)
+                .orElseThrow(() -> new MemberNotFoundException("해당 Email이 존재하지 않습니다."));
+
+        if(passwordEncoder.matches(password, member.getPassword())) {
+            return member;
+        }
+
+        throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
     }
 }
