@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class MemberV2SignUpEvent {
-    private Long id;
+    private final Long id;
     private final String email;
     private final String authKey;
 
@@ -15,6 +15,7 @@ public class MemberV2SignUpEvent {
     }
 
     public MemberV2SignUpEvent(String email, String authKey) {
+        this.id = null;
         this.email = email;
         this.authKey = authKey;
     }
