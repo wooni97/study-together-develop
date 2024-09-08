@@ -5,6 +5,7 @@ import dev.flab.studytogether.domain.member.entity.MemberV2;
 import dev.flab.studytogether.domain.member.event.MemberV2SignUpEvent;
 import dev.flab.studytogether.domain.member.exception.*;
 import dev.flab.studytogether.domain.member.repository.EmailAuthenticationRepository;
+import dev.flab.studytogether.domain.event.EventRepository;
 import dev.flab.studytogether.domain.member.repository.MemberV2Repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,8 +19,7 @@ public class MemberV2Service {
     private final MemberV2Repository memberV2Repository;
     private final EmailAuthenticationRepository emailAuthenticationRepository;
     private final PasswordEncoder passwordEncoder;
-    private final MemberV2SignUpEventPublishService memberV2SignUpEventPublishService;
-
+    private final EventRepository eventRepository;
 
     @Transactional
     public MemberV2 signUp(String email, String password, String nickname) {
@@ -41,8 +41,11 @@ public class MemberV2Service {
         memberV2Repository.save(newMember);
         emailAuthenticationRepository.save(emailAuthentication);
 
-        memberV2SignUpEventPublishService.publishEvent(
-                new MemberV2SignUpEvent(newMember.getEmail(), emailAuthentication.getAuthKey()));
+        MemberV2SignUpEvent event = MemberV2SignUpEvent.createEvent(
+                newMember.getId(),
+                newMember.getEmail(),
+                emailAuthentication.getAuthKey());
+        eventRepository.save(event);
 
         return newMember;
     }
