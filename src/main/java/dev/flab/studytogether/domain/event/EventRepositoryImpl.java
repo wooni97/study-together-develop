@@ -30,7 +30,7 @@ public class EventRepositoryImpl implements EventRepository {
         try {
             paylaod = objectMapper.writeValueAsString(event);
         } catch (JsonProcessingException e) {
-            log.error("message : {}", e.getMessage());
+            throw new RuntimeException(e);
         }
 
         Map<String, Object> parameters = new HashMap<>();
