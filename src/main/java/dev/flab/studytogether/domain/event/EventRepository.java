@@ -1,4 +1,4 @@
-package dev.flab.studytogether.domain.member.repository;
+package dev.flab.studytogether.domain.event;
 
 import dev.flab.studytogether.domain.event.AbstractEvent;
 
