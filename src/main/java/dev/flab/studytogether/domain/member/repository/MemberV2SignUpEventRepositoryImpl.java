@@ -33,7 +33,7 @@ public class MemberV2SignUpEventRepositoryImpl implements MemberV2SignUpEventRep
 
     @Override
     public List<MemberV2SignUpEvent> findUnprocessedEvents() {
-        String query = "SELECT * FROM MEMBER_SIGN_UP_EVENT WHERE PROCESSED_FLAG = FALSE";
+        String query = "SELECT SEQ_ID, EMAIL, AUTH_KEY FROM MEMBER_SIGN_UP_EVENT WHERE PROCESSED_FLAG = FALSE";
         return jdbcTemplate.query(query, memberV2SignUpEventRowMapper());
     }
 
