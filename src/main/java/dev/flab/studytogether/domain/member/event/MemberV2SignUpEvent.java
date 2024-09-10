@@ -1,12 +1,12 @@
 package dev.flab.studytogether.domain.member.event;
 
-import dev.flab.studytogether.domain.event.AbstractEvent;
+import dev.flab.studytogether.domain.event.DomainEvent;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class MemberV2SignUpEvent extends AbstractEvent {
+public class MemberV2SignUpEvent extends DomainEvent {
     private final Long userId;
     private final String userEmail;
     private final String authKey;
@@ -17,6 +17,13 @@ public class MemberV2SignUpEvent extends AbstractEvent {
         this.userEmail = userEmail;
         this.authKey = authKey;
 
+    }
+
+    public MemberV2SignUpEvent(Long userId, String userEmail, String authKey, LocalDateTime createdAt) {
+        super(createdAt);
+        this.userId = userId;
+        this.userEmail = userEmail;
+        this.authKey = authKey;
     }
 
     public static MemberV2SignUpEvent createEvent(Long userId, String userEmail, String authKey) {
