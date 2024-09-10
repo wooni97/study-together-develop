@@ -6,6 +6,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @RequiredArgsConstructor
-public abstract class AbstractEvent {
+public abstract class DomainEvent {
     private final LocalDateTime createdAt;
 }
