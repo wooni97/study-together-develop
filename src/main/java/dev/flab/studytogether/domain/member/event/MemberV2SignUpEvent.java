@@ -19,14 +19,18 @@ public class MemberV2SignUpEvent extends DomainEvent {
 
     }
 
-    public MemberV2SignUpEvent(Long userId, String userEmail, String authKey, LocalDateTime createdAt) {
+    private MemberV2SignUpEvent(Long userId, String userEmail, String authKey, LocalDateTime createdAt) {
         super(createdAt);
         this.userId = userId;
         this.userEmail = userEmail;
         this.authKey = authKey;
     }
 
-    public static MemberV2SignUpEvent createEvent(Long userId, String userEmail, String authKey) {
+    public static MemberV2SignUpEvent createNewEvent(Long userId, String userEmail, String authKey) {
         return new MemberV2SignUpEvent(userId, userEmail, authKey);
+    }
+
+    public static MemberV2SignUpEvent createFromExisting(Long userId, String userEmail, String authKey, LocalDateTime createdAt) {
+        return new MemberV2SignUpEvent(userId, userEmail, authKey, createdAt);
     }
 }

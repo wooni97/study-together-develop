@@ -41,7 +41,7 @@ public class MemberV2Service {
         memberV2Repository.save(newMember);
         emailAuthenticationRepository.save(emailAuthentication);
 
-        MemberV2SignUpEvent event = MemberV2SignUpEvent.createEvent(
+        MemberV2SignUpEvent event = MemberV2SignUpEvent.createNewEvent(
                 newMember.getId(),
                 newMember.getEmail(),
                 emailAuthentication.getAuthKey());

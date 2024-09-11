@@ -16,7 +16,7 @@ public class MemberV2SignUpEventRowMapper implements DomainEventRowMapper<Member
 
     @Override
     public MemberV2SignUpEvent createDomainEvent() {
-        return new MemberV2SignUpEvent(userId, userEmail, authKey, createdAt);
+        return MemberV2SignUpEvent.createFromExisting(userId, userEmail, authKey, createdAt);
     }
 
     @Override
