@@ -2,8 +2,10 @@ package dev.flab.studytogether.domain.member.service;
 
 import dev.flab.studytogether.domain.member.entity.EmailAuthentication;
 import dev.flab.studytogether.domain.member.entity.MemberV2;
+import dev.flab.studytogether.domain.member.event.MemberV2SignUpEvent;
 import dev.flab.studytogether.domain.member.exception.*;
 import dev.flab.studytogether.domain.member.repository.EmailAuthenticationRepository;
+import dev.flab.studytogether.domain.event.EventRepository;
 import dev.flab.studytogether.domain.member.repository.MemberV2Repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,9 +18,8 @@ import java.util.Optional;
 public class MemberV2Service {
     private final MemberV2Repository memberV2Repository;
     private final EmailAuthenticationRepository emailAuthenticationRepository;
-    private final NotificationService notificationService;
     private final PasswordEncoder passwordEncoder;
-
+    private final EventRepository eventRepository;
 
     @Transactional
     public MemberV2 signUp(String email, String password, String nickname) {
@@ -38,8 +39,13 @@ public class MemberV2Service {
         EmailAuthentication emailAuthentication = createEmailAuthentication(email);
 
         memberV2Repository.save(newMember);
+        emailAuthenticationRepository.save(emailAuthentication);
 
-        notificationService.sendEmailAddressVerification(email, emailAuthentication.getAuthKey());
+        MemberV2SignUpEvent event = MemberV2SignUpEvent.createNewEvent(
+                newMember.getId(),
+                newMember.getEmail(),
+                emailAuthentication.getAuthKey());
+        eventRepository.save(event);
 
         return newMember;
     }
