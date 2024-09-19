@@ -1,7 +1,8 @@
-package dev.flab.studytogether.domain.room.repository;
+package dev.flab.studytogether.domain.room.infrastructure;
 
 import dev.flab.studytogether.domain.room.entity.Participant;
 import dev.flab.studytogether.domain.room.entity.ParticipantRole;
+import dev.flab.studytogether.domain.room.repository.ParticipantRepository;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -9,7 +10,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
