@@ -17,9 +17,10 @@ public class ParticipantV2 {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "STUDY_GROUP_ID")
     private StudyGroup studyGroup;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private MemberV2 memberV2;
+    @Enumerated(EnumType.STRING)
     private ParticipantRole participantRole;
     private LocalDateTime joinedAt;
 
