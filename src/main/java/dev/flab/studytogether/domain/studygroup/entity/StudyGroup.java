@@ -2,7 +2,7 @@ package dev.flab.studytogether.domain.studygroup.entity;
 
 import dev.flab.studytogether.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.domain.room.entity.ParticipantRole;
-import dev.flab.studytogether.domain.room.exception.GroupEntryException;
+import dev.flab.studytogether.domain.studygroup.exception.GroupCapacityExceededException;
 
 import javax.persistence.*;
 import java.util.Comparator;
@@ -35,7 +35,7 @@ public class StudyGroup {
             return;
 
         if(isGroupFull())
-            throw new GroupEntryException("그룹 정원이 다 찼습니다.");
+            throw new GroupCapacityExceededException("그룹 정원이 다 찼습니다.");
 
         participants.addParticipant(participant);
     }
