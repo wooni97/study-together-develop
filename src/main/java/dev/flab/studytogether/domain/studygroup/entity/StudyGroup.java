@@ -3,6 +3,7 @@ package dev.flab.studytogether.domain.studygroup.entity;
 import dev.flab.studytogether.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.domain.room.entity.ParticipantRole;
 import dev.flab.studytogether.domain.studygroup.exception.GroupCapacityExceededException;
+import dev.flab.studytogether.domain.studygroup.exception.MemberAlreadyExistsInGroupException;
 
 import javax.persistence.*;
 import java.util.Comparator;
@@ -32,7 +33,7 @@ public class StudyGroup {
 
     public void joinGroup(ParticipantV2 participant) {
         if(isMemberExists(participant))
-            return;
+            throw new MemberAlreadyExistsInGroupException("이미 StudyGroup에 존재하는 유저입니다.");
 
         if(isGroupFull())
             throw new GroupCapacityExceededException("그룹 정원이 다 찼습니다.");
