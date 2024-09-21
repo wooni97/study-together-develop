@@ -1,16 +1,20 @@
 package dev.flab.studytogether.domain.studygroup.entity;
 
+import dev.flab.studytogether.domain.member.entity.MemberV2;
 import dev.flab.studytogether.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.domain.room.entity.ParticipantRole;
 import dev.flab.studytogether.domain.studygroup.exception.GroupCapacityExceededException;
 import dev.flab.studytogether.domain.studygroup.exception.MemberAlreadyExistsInGroupException;
+import lombok.Getter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Entity
+@Getter
 public class StudyGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,16 +23,31 @@ public class StudyGroup {
     private int maxParticipants;
     @Embedded
     private ParticipantsV2 participants;
+    @OneToOne
+    @JoinColumn(name = "MANAGER_PARTICIPANT_ID")
+    private ParticipantV2 groupManager;
     @Enumerated(EnumType.STRING)
     private ActivateStatus activateStatus;
 
     protected StudyGroup() {}
 
-    public StudyGroup(String groupTitle, int maxParticipants, ActivateStatus activateStatus) {
+    public StudyGroup(String groupTitle, int maxParticipants, MemberV2 groupCreator, ActivateStatus activateStatus) {
         this.groupTitle = groupTitle;
         this.maxParticipants = maxParticipants;
         this.activateStatus = activateStatus;
+        setGroupManager(groupCreator);
         this.participants = new ParticipantsV2();
+    }
+
+    private void setGroupManager(MemberV2 groupCreator) {
+        ParticipantV2 groupManager = ParticipantV2.createNewParticipant(
+                this,
+                groupCreator,
+                ParticipantRole.ROOM_MANAGER,
+                LocalDateTime.now());
+        this.groupManager = groupManager;
+
+        joinGroup(groupManager);
     }
 
     public void joinGroup(ParticipantV2 participant) {
@@ -42,7 +61,7 @@ public class StudyGroup {
     }
 
     public StudyGroup exitGroup(ParticipantV2 participant) {
-        if(participant.equals(participants.getRoomManger())) {
+        if(participant.equals(groupManager)) {
             changeGroupManager();
         }
 
@@ -55,7 +74,7 @@ public class StudyGroup {
     }
 
     public void changeGroupManager(){
-        ParticipantV2 currentRoomManager = participants.getRoomManger();
+        ParticipantV2 currentRoomManager = this.groupManager;
         Optional<ParticipantV2> nextRoomManager = findNextManager();
 
         if (nextRoomManager.isEmpty()) {
@@ -74,7 +93,7 @@ public class StudyGroup {
     }
 
     public boolean isGroupManager(ParticipantV2 participant) {
-        return participants.getRoomManger().equals(participant);
+        return this.groupManager.equals(participant);
     }
 
     public boolean isMemberExists(ParticipantV2 participant) {
@@ -83,10 +102,6 @@ public class StudyGroup {
 
     public int getCurrentParticipantsCount() {
         return participants.getCurrentParticipantsCount();
-    }
-
-    public ParticipantV2 getGroupManager() {
-        return participants.getRoomManger();
     }
 
     private void changeParticipantRole(ParticipantV2 participant, ParticipantRole roleToChange) {
