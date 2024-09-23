@@ -31,18 +31,21 @@ public class StudyGroup {
 
     protected StudyGroup() {}
 
-    public StudyGroup(String groupTitle, int maxParticipants, MemberV2 groupCreator, ActivateStatus activateStatus) {
+    public StudyGroup(String groupTitle, int maxParticipants, MemberV2 creator, ActivateStatus activateStatus) {
         this.groupTitle = groupTitle;
         this.maxParticipants = maxParticipants;
         this.activateStatus = activateStatus;
-        setGroupManager(groupCreator);
         this.participants = new ParticipantsV2();
     }
 
-    private void setGroupManager(MemberV2 groupCreator) {
+    public void setGroupManager(MemberV2 creator) {
+        if(this.id == null) {
+            throw new IllegalStateException("스터디 그룹이 먼저 저장되어야 합니다.");
+        }
+
         ParticipantV2 groupManager = ParticipantV2.createNewParticipant(
                 this,
-                groupCreator,
+                creator.getId(),
                 ParticipantRole.ROOM_MANAGER,
                 LocalDateTime.now());
         this.groupManager = groupManager;
