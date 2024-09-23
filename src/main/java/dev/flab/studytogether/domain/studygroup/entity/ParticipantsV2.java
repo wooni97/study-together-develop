@@ -1,6 +1,5 @@
 package dev.flab.studytogether.domain.studygroup.entity;
 
-import dev.flab.studytogether.domain.room.entity.ParticipantRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 public class ParticipantsV2 {
-    @OneToMany(mappedBy = "studyGroup", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE}, mappedBy = "studyGroupId")
     private List<ParticipantV2> participants = new ArrayList<>();
 
     public ParticipantsV2(List<ParticipantV2> participants) {
@@ -31,14 +30,6 @@ public class ParticipantsV2 {
 
     public int getCurrentParticipantsCount() {
         return participants.size();
-    }
-
-    public ParticipantV2 getRoomManger() {
-        return participants.stream()
-                .filter(participant ->
-                        participant.getParticipantRole().equals(ParticipantRole.ROOM_MANAGER))
-                .findFirst()
-                .get();
     }
 
     public boolean hasParticipant(ParticipantV2 participantV2) {
