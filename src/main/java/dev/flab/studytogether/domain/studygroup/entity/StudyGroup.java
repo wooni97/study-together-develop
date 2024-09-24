@@ -85,8 +85,8 @@ public class StudyGroup {
                 .min(Comparator.comparing(ParticipantV2::getJoinedAt));
     }
 
-    public boolean isGroupManager(ParticipantV2 participant) {
-        return this.groupManager.equals(participant);
+    public boolean isGroupManager(Long participantId) {
+        return this.groupManager.getId().equals(participantId);
     }
 
     public boolean isMemberExists(ParticipantV2 participant) {
