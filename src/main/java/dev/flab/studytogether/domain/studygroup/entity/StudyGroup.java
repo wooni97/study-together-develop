@@ -74,8 +74,10 @@ public class StudyGroup {
             throw new NoSuchElementException("방장 권한을 위임할 사용자가 존재하지 않습니다.");
         }
 
-        changeParticipantRole(currentRoomManager, ParticipantRole.ORDINARY_PARTICIPANT);
-        changeParticipantRole(nextRoomManager.get(), ParticipantRole.ROOM_MANAGER);
+        changeParticipantRole(currentRoomManager.getId(), ParticipantRole.ORDINARY_PARTICIPANT);
+        changeParticipantRole(nextRoomManager.get().getId(), ParticipantRole.ROOM_MANAGER);
+
+        this.groupManager = nextRoomManager.get();
     }
 
     private Optional<ParticipantV2> findNextManager() {
