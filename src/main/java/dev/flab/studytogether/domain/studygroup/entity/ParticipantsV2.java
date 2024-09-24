@@ -27,15 +27,13 @@ public class ParticipantsV2 {
     }
 
     public void removeParticipant(Long participantId) {
-        Optional<ParticipantV2> removeParticipant = participants.stream()
-                        .filter(participant -> participantId.equals(participant.getId()))
-                        .findFirst();
+        ParticipantV2 removeParticipant = participants.stream()
+                .filter(participant -> participantId.equals(participant.getId()))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException("현재 StudyGroup에 존재하지 않는 참여자입니다."));
 
-        if(removeParticipant.isEmpty()) {
-            throw new NoSuchElementException("현재 StudyGroup에 존재하지 않는 참여자입니다.");
-        }
 
-        participants.remove(removeParticipant.get());
+        participants.remove(removeParticipant);
     }
 
     public int getCurrentParticipantsCount() {
