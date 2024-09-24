@@ -1,6 +1,5 @@
 package dev.flab.studytogether.domain.studygroup.entity;
 
-import dev.flab.studytogether.domain.member.entity.MemberV2;
 import dev.flab.studytogether.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.domain.room.entity.ParticipantRole;
 import dev.flab.studytogether.domain.studygroup.exception.GroupCapacityExceededException;
@@ -8,7 +7,6 @@ import dev.flab.studytogether.domain.studygroup.exception.MemberAlreadyExistsInG
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -31,26 +29,11 @@ public class StudyGroup {
 
     protected StudyGroup() {}
 
-    public StudyGroup(String groupTitle, int maxParticipants, MemberV2 creator, ActivateStatus activateStatus) {
+    public StudyGroup(String groupTitle, int maxParticipants, ActivateStatus activateStatus) {
         this.groupTitle = groupTitle;
         this.maxParticipants = maxParticipants;
         this.activateStatus = activateStatus;
         this.participants = new ParticipantsV2();
-    }
-
-    public void setGroupManager(MemberV2 creator) {
-        if(this.id == null) {
-            throw new IllegalStateException("스터디 그룹이 먼저 저장되어야 합니다.");
-        }
-
-        ParticipantV2 groupManager = ParticipantV2.createNewParticipant(
-                this,
-                creator.getId(),
-                ParticipantRole.ROOM_MANAGER,
-                LocalDateTime.now());
-        this.groupManager = groupManager;
-
-        joinGroup(groupManager);
     }
 
     public void joinGroup(ParticipantV2 participant) {
@@ -61,14 +44,18 @@ public class StudyGroup {
             throw new GroupCapacityExceededException("그룹 정원이 다 찼습니다.");
 
         participants.addParticipant(participant);
+
+        if(ParticipantRole.ROOM_MANAGER.equals(participant.getParticipantRole())) {
+            this.groupManager = participant;
+        }
     }
 
-    public StudyGroup exitGroup(ParticipantV2 participant) {
-        if(participant.equals(groupManager)) {
+    public StudyGroup exitGroup(Long participantId) {
+        if(groupManager.getId().equals(participantId)) {
             changeGroupManager();
         }
 
-        participants.removeParticipant(participant);
+        participants.removeParticipant(participantId);
         return this;
     }
 
@@ -100,7 +87,7 @@ public class StudyGroup {
     }
 
     public boolean isMemberExists(ParticipantV2 participant) {
-        return participants.hasParticipant(participant);
+        return participants.hasParticipant(participant.getId());
     }
 
     public int getCurrentParticipantsCount() {
