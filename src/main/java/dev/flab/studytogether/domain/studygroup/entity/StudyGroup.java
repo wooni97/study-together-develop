@@ -68,16 +68,13 @@ public class StudyGroup {
 
     public void changeGroupManager(){
         ParticipantV2 currentRoomManager = this.groupManager;
-        Optional<ParticipantV2> nextRoomManager = findNextManager();
-
-        if (nextRoomManager.isEmpty()) {
-            throw new NoSuchElementException("방장 권한을 위임할 사용자가 존재하지 않습니다.");
-        }
+        ParticipantV2 nextRoomManager = findNextManager()
+                .orElseThrow(() -> new NoSuchElementException("방장 권한을 위임할 사용자가 존재하지 않습니다."));
 
         changeParticipantRole(currentRoomManager.getId(), ParticipantRole.ORDINARY_PARTICIPANT);
-        changeParticipantRole(nextRoomManager.get().getId(), ParticipantRole.ROOM_MANAGER);
+        changeParticipantRole(nextRoomManager.getId(), ParticipantRole.ROOM_MANAGER);
 
-        this.groupManager = nextRoomManager.get();
+        this.groupManager = nextRoomManager;
     }
 
     private Optional<ParticipantV2> findNextManager() {
