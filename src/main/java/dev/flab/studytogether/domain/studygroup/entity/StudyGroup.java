@@ -2,6 +2,7 @@ package dev.flab.studytogether.domain.studygroup.entity;
 
 import dev.flab.studytogether.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.domain.room.entity.ParticipantRole;
+import dev.flab.studytogether.domain.studygroup.exception.CannotAssignManagerException;
 import dev.flab.studytogether.domain.studygroup.exception.GroupCapacityExceededException;
 import dev.flab.studytogether.domain.studygroup.exception.MemberAlreadyExistsInGroupException;
 import lombok.Getter;
@@ -46,6 +47,8 @@ public class StudyGroup {
         participants.addParticipant(participant);
 
         if(ParticipantRole.ROOM_MANAGER.equals(participant.getParticipantRole())) {
+            if(groupManager != null) throw new CannotAssignManagerException("Group Manager가 존재하는 그룹엔 매니저로 참여가 불가능합니다.");
+
             this.groupManager = participant;
         }
     }
