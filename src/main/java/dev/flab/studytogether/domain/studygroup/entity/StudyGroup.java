@@ -23,7 +23,7 @@ public class StudyGroup {
     @Embedded
     private ParticipantsV2 participants;
     @OneToOne
-    @JoinColumn(name = "MANAGER_PARTICIPANT_ID")
+    @JoinColumn(name = "manager_participant_id")
     private ParticipantV2 groupManager;
     @Enumerated(EnumType.STRING)
     private ActivateStatus activateStatus;
