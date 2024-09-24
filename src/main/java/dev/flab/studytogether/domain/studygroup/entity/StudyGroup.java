@@ -97,9 +97,9 @@ public class StudyGroup {
         return participants.getCurrentParticipantsCount();
     }
 
-    private void changeParticipantRole(ParticipantV2 participant, ParticipantRole roleToChange) {
+    private void changeParticipantRole(Long participantId, ParticipantRole roleToChange) {
         participants.getParticipants().stream()
-                .filter(p -> p.equals(participant))
+                .filter(p -> p.getId().equals(participantId))
                 .findFirst()
                 .ifPresent(p -> p.changeRole(roleToChange));
     }
