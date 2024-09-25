@@ -1,2 +1,14 @@
-### 프로젝트 디벨롭
-이전 프로젝트 : https://github.com/f-lab-edu/study-together
+## Study Together
+
+### 소개
+개발자들이 함께 모여 '모각코'(모여서 각자 코딩)를 진행할 수 있는 플랫폼입니다. 
+
+### 사용 기술
+
+
+### 🚀 프로젝트 Develop 과정
+[이전 Repository](https://github.com/f-lab-edu/study-together)
+
+해당 비즈니스를 실제로 서비스한다면 어떤 고민이 필요할지, 그리고 비즈니스를 성공적으로 이끌기 위해서는 무엇을 개선해야 할지에 대한 답을 찾고자 고도화 과정을 진행하게 되었습니다.
+
+### 기술적 고민
