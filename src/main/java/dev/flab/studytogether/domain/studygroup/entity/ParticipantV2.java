@@ -1,6 +1,6 @@
 package dev.flab.studytogether.domain.studygroup.entity;
 
-import dev.flab.studytogether.domain.room.entity.ParticipantRole;
+import dev.flab.studytogether.domain.studygroup.role.ParticipantRoleV2;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -17,10 +17,10 @@ public class ParticipantV2 {
     private StudyGroup studyGroup;
     private Long memberId;
     @Enumerated(EnumType.STRING)
-    private ParticipantRole participantRole;
+    private ParticipantRoleV2 participantRole;
     private LocalDateTime joinedAt;
 
-    public ParticipantV2(StudyGroup studyGroup, Long memberId, ParticipantRole participantRole, LocalDateTime joinedAt) {
+    public ParticipantV2(StudyGroup studyGroup, Long memberId, ParticipantRoleV2 participantRole, LocalDateTime joinedAt) {
         this.studyGroup = studyGroup;
         this.memberId = memberId;
         this.participantRole = participantRole;
@@ -29,11 +29,8 @@ public class ParticipantV2 {
 
     protected ParticipantV2() {}
 
-    public void changeRole(ParticipantRole participantRole) {
+    public void changeRole(ParticipantRoleV2 participantRole) {
         this.participantRole = participantRole;
     }
 
-    public static ParticipantV2 createNewParticipant(StudyGroup studyGroup, Long memberId, ParticipantRole participantRole, LocalDateTime joinedAt) {
-        return new ParticipantV2(studyGroup, memberId, participantRole, joinedAt);
-    }
 }
