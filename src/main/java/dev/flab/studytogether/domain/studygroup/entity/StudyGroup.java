@@ -1,10 +1,11 @@
 package dev.flab.studytogether.domain.studygroup.entity;
 
 import dev.flab.studytogether.domain.room.entity.ActivateStatus;
-import dev.flab.studytogether.domain.room.entity.ParticipantRole;
 import dev.flab.studytogether.domain.studygroup.exception.CannotAssignManagerException;
 import dev.flab.studytogether.domain.studygroup.exception.GroupCapacityExceededException;
 import dev.flab.studytogether.domain.studygroup.exception.MemberAlreadyExistsInGroupException;
+import dev.flab.studytogether.domain.studygroup.exception.TerminatedGroupJoinException;
+import dev.flab.studytogether.domain.studygroup.role.ParticipantRoleV2;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -38,7 +39,11 @@ public class StudyGroup {
     }
 
     public void joinGroup(ParticipantV2 participant) {
-        if(isMemberExists(participant))
+        if(this.activateStatus.equals(ActivateStatus.TERMINATED)) {
+            throw new TerminatedGroupJoinException("종료된 Study Group에는 입장할 수 없습니다.");
+        }
+
+        if(isMemberExists(participant.getId()))
             throw new MemberAlreadyExistsInGroupException("이미 StudyGroup에 존재하는 유저입니다.");
 
         if(isGroupFull())
@@ -46,7 +51,7 @@ public class StudyGroup {
 
         participants.addParticipant(participant);
 
-        if(ParticipantRole.ROOM_MANAGER.equals(participant.getParticipantRole())) {
+        if(ParticipantRoleV2.GROUP_MANAGER.equals(participant.getParticipantRole())) {
             if(groupManager != null) throw new CannotAssignManagerException("Group Manager가 존재하는 그룹엔 매니저로 참여가 불가능합니다.");
 
             this.groupManager = participant;
@@ -71,8 +76,8 @@ public class StudyGroup {
         ParticipantV2 nextRoomManager = findNextManager()
                 .orElseThrow(() -> new NoSuchElementException("방장 권한을 위임할 사용자가 존재하지 않습니다."));
 
-        changeParticipantRole(currentRoomManager.getId(), ParticipantRole.ORDINARY_PARTICIPANT);
-        changeParticipantRole(nextRoomManager.getId(), ParticipantRole.ROOM_MANAGER);
+        changeParticipantRole(currentRoomManager.getId(), ParticipantRoleV2.ORDINARY_PARTICIPANT);
+        changeParticipantRole(nextRoomManager.getId(), ParticipantRoleV2.GROUP_MANAGER);
 
         this.groupManager = nextRoomManager;
     }
@@ -80,7 +85,8 @@ public class StudyGroup {
     private Optional<ParticipantV2> findNextManager() {
         return participants.getParticipants()
                 .stream()
-                .filter(participant -> !participant.getParticipantRole().equals(ParticipantRole.ROOM_MANAGER))
+                .filter(participant ->
+                        !participant.getParticipantRole().equals(ParticipantRoleV2.GROUP_MANAGER))
                 .min(Comparator.comparing(ParticipantV2::getJoinedAt));
     }
 
@@ -96,7 +102,7 @@ public class StudyGroup {
         return participants.getCurrentParticipantsCount();
     }
 
-    private void changeParticipantRole(Long participantId, ParticipantRole roleToChange) {
+    private void changeParticipantRole(Long participantId, ParticipantRoleV2 roleToChange) {
         participants.getParticipants().stream()
                 .filter(p -> p.getId().equals(participantId))
                 .findFirst()
