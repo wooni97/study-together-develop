@@ -98,8 +98,8 @@ public class StudyGroup {
         return this.groupManager.getId().equals(participantId);
     }
 
-    public int getCurrentParticipantsCount() {
-        return participants.getCurrentParticipantsCount();
+    public boolean isMemberExists(Long participantId) {
+        return participants.hasParticipant(participantId);
     }
 
     private void changeParticipantRole(Long participantId, ParticipantRoleV2 roleToChange) {
