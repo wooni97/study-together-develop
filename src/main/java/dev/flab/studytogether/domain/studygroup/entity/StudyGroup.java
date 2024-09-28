@@ -5,7 +5,6 @@ import dev.flab.studytogether.domain.studygroup.exception.CannotAssignManagerExc
 import dev.flab.studytogether.domain.studygroup.exception.GroupCapacityExceededException;
 import dev.flab.studytogether.domain.studygroup.exception.MemberAlreadyExistsInGroupException;
 import dev.flab.studytogether.domain.studygroup.exception.TerminatedGroupJoinException;
-import dev.flab.studytogether.domain.studygroup.role.ParticipantRoleV2;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -51,7 +50,7 @@ public class StudyGroup {
 
         participants.addParticipant(participant);
 
-        if(ParticipantRoleV2.GROUP_MANAGER.equals(participant.getParticipantRole())) {
+        if(ParticipantV2.ParticipantRoleV2.GROUP_MANAGER.equals(participant.getParticipantRole())) {
             if(groupManager != null) throw new CannotAssignManagerException("Group Manager가 존재하는 그룹엔 매니저로 참여가 불가능합니다.");
 
             this.groupManager = participant;
@@ -80,8 +79,8 @@ public class StudyGroup {
         ParticipantV2 nextRoomManager = findNextManager()
                 .orElseThrow(() -> new NoSuchElementException("방장 권한을 위임할 사용자가 존재하지 않습니다."));
 
-        changeParticipantRole(currentRoomManager.getId(), ParticipantRoleV2.ORDINARY_PARTICIPANT);
-        changeParticipantRole(nextRoomManager.getId(), ParticipantRoleV2.GROUP_MANAGER);
+        changeParticipantRole(currentRoomManager.getId(), ParticipantV2.ParticipantRoleV2.ORDINARY_PARTICIPANT);
+        changeParticipantRole(nextRoomManager.getId(), ParticipantV2.ParticipantRoleV2.GROUP_MANAGER);
 
         this.groupManager = nextRoomManager;
     }
@@ -90,7 +89,7 @@ public class StudyGroup {
         return participants.getParticipants()
                 .stream()
                 .filter(participant ->
-                        !participant.getParticipantRole().equals(ParticipantRoleV2.GROUP_MANAGER))
+                        !participant.getParticipantRole().equals(ParticipantV2.ParticipantRoleV2.GROUP_MANAGER))
                 .min(Comparator.comparing(ParticipantV2::getJoinedAt));
     }
 
@@ -102,7 +101,7 @@ public class StudyGroup {
         return participants.hasParticipant(memberId);
     }
 
-    private void changeParticipantRole(Long participantId, ParticipantRoleV2 roleToChange) {
+    private void changeParticipantRole(Long participantId, ParticipantV2.ParticipantRoleV2 roleToChange) {
         participants.getParticipants().stream()
                 .filter(p -> p.getId().equals(participantId))
                 .findFirst()

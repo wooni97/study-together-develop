@@ -84,6 +84,5 @@ class StudyGroupExitServiceTest {
         //then
         assertThat(resultStudyGroup.getGroupManager().getId())
                 .isEqualTo(nextManagerParticipantId);
-
     }
 }

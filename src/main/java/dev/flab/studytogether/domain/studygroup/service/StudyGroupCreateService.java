@@ -4,7 +4,6 @@ import dev.flab.studytogether.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.domain.studygroup.entity.ParticipantV2;
 import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
 import dev.flab.studytogether.domain.studygroup.repository.StudyGroupRepository;
-import dev.flab.studytogether.domain.studygroup.role.ParticipantRoleV2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +23,7 @@ public class StudyGroupCreateService {
 
         ParticipantV2 participant = new ParticipantV2(studyGroup,
                 groupCreatorMemberId,
-                ParticipantRoleV2.GROUP_MANAGER,
+                ParticipantV2.ParticipantRoleV2.GROUP_MANAGER,
                 LocalDateTime.now());
 
         studyGroup.joinGroup(participant);

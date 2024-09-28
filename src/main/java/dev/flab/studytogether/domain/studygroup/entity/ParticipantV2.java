@@ -1,6 +1,6 @@
 package dev.flab.studytogether.domain.studygroup.entity;
 
-import dev.flab.studytogether.domain.studygroup.role.ParticipantRoleV2;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -31,6 +31,15 @@ public class ParticipantV2 {
 
     public void changeRole(ParticipantRoleV2 participantRole) {
         this.participantRole = participantRole;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public enum ParticipantRoleV2 {
+        GROUP_MANAGER("Study Group Manager"),
+        ORDINARY_PARTICIPANT("Ordinary Participant");
+
+        private final String roleDescription;
     }
 
 }
