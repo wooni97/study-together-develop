@@ -43,7 +43,7 @@ public class StudyGroup {
             throw new TerminatedGroupJoinException("종료된 Study Group에는 입장할 수 없습니다.");
         }
 
-        if(isMemberExists(participant.getId()))
+        if(isMemberExists(participant.getMemberId()))
             throw new MemberAlreadyExistsInGroupException("이미 StudyGroup에 존재하는 유저입니다.");
 
         if(isGroupFull())
@@ -58,8 +58,8 @@ public class StudyGroup {
         }
     }
 
-    public void exitGroup(Long participantId) {
-        if(!isMemberExists(participantId)) {
+    public void exitGroup(Long memberId, Long participantId) {
+        if(!isMemberExists(memberId)) {
             throw new NoSuchElementException("해당 StudyGroup에 존재하지 않는 참가자입니다.");
         }
 
@@ -98,8 +98,8 @@ public class StudyGroup {
         return this.groupManager.getId().equals(participantId);
     }
 
-    public boolean isMemberExists(Long participantId) {
-        return participants.hasParticipant(participantId);
+    public boolean isMemberExists(Long memberId) {
+        return participants.hasParticipant(memberId);
     }
 
     private void changeParticipantRole(Long participantId, ParticipantRoleV2 roleToChange) {

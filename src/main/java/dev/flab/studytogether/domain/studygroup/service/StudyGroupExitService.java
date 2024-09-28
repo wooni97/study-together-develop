@@ -12,11 +12,11 @@ import java.util.NoSuchElementException;
 public class StudyGroupExitService {
     private final StudyGroupRepository studyGroupRepository;
 
-    public StudyGroup exitGroup(Long roomId, Long participantId) {
+    public StudyGroup exitGroup(Long roomId, Long memberId, Long participantId) {
         StudyGroup studyGroup = studyGroupRepository.findById(roomId)
                 .orElseThrow(() -> new NoSuchElementException("존재하지 않는 ID의 Study Group입니다."));
 
-        studyGroup.exitGroup(participantId);
+        studyGroup.exitGroup(memberId, participantId);
         studyGroupRepository.save(studyGroup);
 
         return studyGroup;

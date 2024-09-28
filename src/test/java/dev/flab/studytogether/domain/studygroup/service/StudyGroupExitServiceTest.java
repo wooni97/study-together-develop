@@ -31,6 +31,7 @@ class StudyGroupExitServiceTest {
         //given
         Long roomId = 1L;
         Long participantId = 2L;
+        Long memberId = 2L;
 
         //when
         StudyGroup studyGroup = TestFixtureUtils.randomStudyGroupWithParticipants();
@@ -39,7 +40,7 @@ class StudyGroupExitServiceTest {
 
         int beforeExitParticipantsCount = studyGroup.getParticipants().getCurrentParticipantsCount();
 
-        StudyGroup resultStudyGroup = studyGroupExitService.exitGroup(roomId, participantId);
+        StudyGroup resultStudyGroup = studyGroupExitService.exitGroup(roomId, participantId, memberId);
 
         //then
         assertThat(resultStudyGroup.getParticipants().getCurrentParticipantsCount())
@@ -53,6 +54,7 @@ class StudyGroupExitServiceTest {
         //given
         Long roomId = 1L;
         Long participantId = 2L;
+        Long memberId = 2L;
 
         //when
         given(studyGroupRepository.findById(roomId))
@@ -60,7 +62,7 @@ class StudyGroupExitServiceTest {
 
         //then
         assertThrows(NoSuchElementException.class,
-                () -> studyGroupExitService.exitGroup(roomId, participantId));
+                () -> studyGroupExitService.exitGroup(roomId, participantId, memberId));
     }
 
     @Test
@@ -69,6 +71,7 @@ class StudyGroupExitServiceTest {
         //given
         Long roomId = 1L;
         Long managerParticipantId = 1L;
+        Long memberId = 1L;
         Long nextManagerParticipantId = 2L;
 
         //when
@@ -76,7 +79,7 @@ class StudyGroupExitServiceTest {
         given(studyGroupRepository.findById(roomId))
                 .willReturn(Optional.of(studyGroup));
 
-        StudyGroup resultStudyGroup = studyGroupExitService.exitGroup(roomId, managerParticipantId);
+        StudyGroup resultStudyGroup = studyGroupExitService.exitGroup(roomId, managerParticipantId, memberId);
 
         //then
         assertThat(resultStudyGroup.getGroupManager().getId())
