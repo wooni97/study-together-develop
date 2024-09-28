@@ -58,14 +58,18 @@ public class StudyGroup {
         }
     }
 
-    public StudyGroup exitGroup(Long participantId) {
-        if(groupManager.getId().equals(participantId)) {
+    public void exitGroup(Long participantId) {
+        if(!isMemberExists(participantId)) {
+            throw new NoSuchElementException("해당 StudyGroup에 존재하지 않는 참가자입니다.");
+        }
+
+        if(isGroupManager(participantId)) {
             changeGroupManager();
         }
 
         participants.removeParticipant(participantId);
-        return this;
     }
+
 
     public boolean isGroupFull() {
         return this.maxParticipants == participants.getCurrentParticipantsCount();
