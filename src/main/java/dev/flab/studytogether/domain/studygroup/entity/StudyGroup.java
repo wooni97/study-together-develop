@@ -98,10 +98,6 @@ public class StudyGroup {
         return this.groupManager.getId().equals(participantId);
     }
 
-    public boolean isMemberExists(ParticipantV2 participant) {
-        return participants.hasParticipant(participant.getId());
-    }
-
     public int getCurrentParticipantsCount() {
         return participants.getCurrentParticipantsCount();
     }
