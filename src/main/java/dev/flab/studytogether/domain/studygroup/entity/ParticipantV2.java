@@ -17,10 +17,10 @@ public class ParticipantV2 {
     private StudyGroup studyGroup;
     private Long memberId;
     @Enumerated(EnumType.STRING)
-    private ParticipantRoleV2 participantRole;
+    private Role participantRole;
     private LocalDateTime joinedAt;
 
-    public ParticipantV2(StudyGroup studyGroup, Long memberId, ParticipantRoleV2 participantRole, LocalDateTime joinedAt) {
+    public ParticipantV2(StudyGroup studyGroup, Long memberId, Role participantRole, LocalDateTime joinedAt) {
         this.studyGroup = studyGroup;
         this.memberId = memberId;
         this.participantRole = participantRole;
@@ -29,13 +29,13 @@ public class ParticipantV2 {
 
     protected ParticipantV2() {}
 
-    public void changeRole(ParticipantRoleV2 participantRole) {
+    public void changeRole(Role participantRole) {
         this.participantRole = participantRole;
     }
 
     @Getter
     @AllArgsConstructor
-    public enum ParticipantRoleV2 {
+    public enum Role {
         GROUP_MANAGER("Study Group Manager"),
         ORDINARY_PARTICIPANT("Ordinary Participant");
 

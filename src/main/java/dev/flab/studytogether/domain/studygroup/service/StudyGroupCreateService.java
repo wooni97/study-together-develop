@@ -23,7 +23,7 @@ public class StudyGroupCreateService {
 
         ParticipantV2 participant = new ParticipantV2(studyGroup,
                 groupCreatorMemberId,
-                ParticipantV2.ParticipantRoleV2.GROUP_MANAGER,
+                ParticipantV2.Role.GROUP_MANAGER,
                 LocalDateTime.now());
 
         studyGroup.joinGroup(participant);

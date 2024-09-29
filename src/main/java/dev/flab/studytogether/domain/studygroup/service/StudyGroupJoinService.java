@@ -22,7 +22,7 @@ public class StudyGroupJoinService {
 
         ParticipantV2 participant = new ParticipantV2(studyGroup,
                 memberId,
-                ParticipantV2.ParticipantRoleV2.ORDINARY_PARTICIPANT,
+                ParticipantV2.Role.ORDINARY_PARTICIPANT,
                 LocalDateTime.now());
 
         studyGroup.joinGroup(participant);
