@@ -40,8 +40,8 @@ public class ParticipantsV2 {
         return participants.size();
     }
 
-    public boolean hasParticipant(Long participantId) {
+    public boolean hasParticipant(Long memberId) {
         return participants.stream()
-                    .anyMatch(participant -> participant.getId().equals(participantId));
+                    .anyMatch(participant -> participant.getMemberId().equals(memberId));
     }
 }
