@@ -6,7 +6,6 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.Comparator;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Entity
@@ -74,7 +73,7 @@ public class StudyGroup {
     public void changeGroupManager(){
         ParticipantV2 currentRoomManager = this.groupManager;
         ParticipantV2 nextRoomManager = findNextManager()
-                .orElseThrow(() -> new NoSuchElementException("방장 권한을 위임할 사용자가 존재하지 않습니다."));
+                .orElseThrow(() -> new NoParticipantForManagerDelegateException("방장 권한을 위임할 사용자가 존재하지 않습니다."));
 
         changeParticipantRole(currentRoomManager.getId(), ParticipantV2.Role.ORDINARY_PARTICIPANT);
         changeParticipantRole(nextRoomManager.getId(), ParticipantV2.Role.GROUP_MANAGER);
