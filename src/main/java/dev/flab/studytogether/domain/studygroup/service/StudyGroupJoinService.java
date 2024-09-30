@@ -2,6 +2,7 @@ package dev.flab.studytogether.domain.studygroup.service;
 
 import dev.flab.studytogether.domain.studygroup.entity.ParticipantV2;
 import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
+import dev.flab.studytogether.domain.studygroup.exception.StudyGroupNotFoundException;
 import dev.flab.studytogether.domain.studygroup.repository.StudyGroupRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class StudyGroupJoinService {
     @Transactional
     public StudyGroup joinGroup(Long roomId, Long memberId) {
         StudyGroup studyGroup = studyGroupRepository.findById(roomId)
-                .orElseThrow(() -> new NoSuchElementException("존재하지 않는 ID의 Study Group입니다."));
+                .orElseThrow(() -> new StudyGroupNotFoundException(roomId));
 
         ParticipantV2 participant = new ParticipantV2(studyGroup,
                 memberId,

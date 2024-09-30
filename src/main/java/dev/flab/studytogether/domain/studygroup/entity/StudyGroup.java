@@ -1,10 +1,7 @@
 package dev.flab.studytogether.domain.studygroup.entity;
 
 import dev.flab.studytogether.domain.room.entity.ActivateStatus;
-import dev.flab.studytogether.domain.studygroup.exception.CannotAssignManagerException;
-import dev.flab.studytogether.domain.studygroup.exception.GroupCapacityExceededException;
-import dev.flab.studytogether.domain.studygroup.exception.MemberAlreadyExistsInGroupException;
-import dev.flab.studytogether.domain.studygroup.exception.TerminatedGroupJoinException;
+import dev.flab.studytogether.domain.studygroup.exception.*;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -59,7 +56,7 @@ public class StudyGroup {
 
     public void exitGroup(Long memberId, Long participantId) {
         if(!isMemberExists(memberId)) {
-            throw new NoSuchElementException("해당 StudyGroup에 존재하지 않는 참가자입니다.");
+            throw new MemberNotFoundInGroupException(this.id, memberId);
         }
 
         if(isGroupManager(participantId)) {
