@@ -27,4 +27,4 @@ Naver Cloud Platform
 
 ✔️ [Event 기반 아키텍처와 Transactional Outbox 패턴을 통한 메시지 발행 보장](https://dev-wooni.tistory.com/13)
 
-✔️ [이벤트 확장성 고민, 추상화로 해결하기(이벤트 동적 매핑 하는 방법)](https://dev-wooni.tistory.com/14)
+✔️ [이벤트 확장성 고민, 추상화로 해결하기 : 이벤트 동적 매핑 하는 방법](https://dev-wooni.tistory.com/14)
