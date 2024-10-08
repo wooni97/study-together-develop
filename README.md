@@ -4,13 +4,13 @@
 개발자들이 함께 모여 '모각코'(모여서 각자 코딩)를 진행할 수 있는 플랫폼입니다. 
 
 ### 사용 기술
-Java17
+**JDK** : Java17
 
-SpringBoot
+**Framework** : SpringBoot
 
-GitHub Actions
+**CI/CD** : GitHub Actions
 
-Naver Cloud Platform
+**배포** : Naver Cloud Platform
 
 
 ### 🚀 프로젝트 Develop 과정
