@@ -8,12 +8,14 @@
 - **JDK** : Java17
 
 - **Framework** : SpringBoot
-
+  
+- **Database** : MySQL 8.0.24
+  
 - **CI/CD** : GitHub Actions
-
+  
 - **배포** : Naver Cloud Platform
 
-- **Database** : MySQL 8.0.24
+
 ---
 
 ### 🚀 프로젝트 Develop 과정
@@ -33,8 +35,12 @@
 
 [일대다(OneToMany) 단방향 매핑이 불러오는 성능 비효율에 관한 고민](https://dev-wooni.tistory.com/12)
 
+
 **✔️Event-Driven Architecture**
 
 [Event 기반 아키텍처 사용 이유 및 Transactional Outbox 패턴을 통한 메시지 발행 보장](https://dev-wooni.tistory.com/13)
 
 [Event 확장성 고민, 추상화로 해결하기 : 이벤트 동적 매핑 하는 방법](https://dev-wooni.tistory.com/14)
+
+
+**✔️동시성 제어**
