@@ -34,7 +34,8 @@
 
 ---
 
-### 기술적 고민
+### 🗂️ 기술적 고민
+
 **✔️JPA 도입 과정**
 
 [JpaRepository.save() 안티패턴에 대한 고찰](https://dev-wooni.tistory.com/9)
