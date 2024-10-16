@@ -9,7 +9,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://db-pptd5-kr.vpc-pub-cdb.ntruss.com:3306/study-together-db?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://db-pptd5-kr.vpc-pub-cdb.ntruss.com:3306/study-together?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
     username: application
     password: application123!
   sql:
@@ -40,7 +40,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         format_sql: true
