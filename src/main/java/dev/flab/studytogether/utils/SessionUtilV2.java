@@ -12,4 +12,8 @@ public class SessionUtilV2 {
     public static void setLoginMemberSession(HttpSession httpSession, Long memberId) {
         httpSession.setAttribute("memberId", memberId);
     }
+
+    public static void logout(HttpSession httpSession) {
+        httpSession.removeAttribute("memberId");
+    }
 }

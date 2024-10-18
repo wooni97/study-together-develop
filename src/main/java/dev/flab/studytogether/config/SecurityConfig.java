@@ -23,6 +23,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .antMatchers("/api/study-groups/v1/join").permitAll()
                 .antMatchers("/api/membersV2/login").permitAll()
+                .antMatchers("/api/membersV2/logout").permitAll()
                 .anyRequest().authenticated();
 
         return httpSecurity.build();
