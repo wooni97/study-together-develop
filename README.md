@@ -10,7 +10,11 @@
 
 ----
 ### 예상 UI
-![프레젠테이션1](https://github.com/user-attachments/assets/68326d54-c492-4c49-9e50-d9f0e9418be6)
+![study together ui-1](https://github.com/user-attachments/assets/20e21201-660a-4f27-8969-4fe769f659cf)
+![study together ui (1)](https://github.com/user-attachments/assets/307e5c05-ee1c-4598-830b-1728b484f22b)
+![study together ui (2)](https://github.com/user-attachments/assets/466b91fe-c87c-448c-8397-06ecc53b8046)
+![study together ui (3)](https://github.com/user-attachments/assets/1d0ea8ef-7c86-4432-bfef-857fb13f5a00)
+
 
 ---
 
