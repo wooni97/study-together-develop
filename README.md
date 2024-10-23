@@ -8,16 +8,7 @@
 
 함께 모여 코드 에디터를 통해 같이 코딩하고, 채팅으로 대화할 수 있습니다.
 
-----
-### 예상 UI
-![study together ui-1](https://github.com/user-attachments/assets/20e21201-660a-4f27-8969-4fe769f659cf)
-![study together ui (1)](https://github.com/user-attachments/assets/307e5c05-ee1c-4598-830b-1728b484f22b)
-![study together ui (2)](https://github.com/user-attachments/assets/466b91fe-c87c-448c-8397-06ecc53b8046)
-![study together ui (3)](https://github.com/user-attachments/assets/1d0ea8ef-7c86-4432-bfef-857fb13f5a00)
-
-
 ---
-
 ### 사용 기술
 - **JDK** : Java17
 
@@ -29,6 +20,12 @@
   
 - **배포** : Naver Cloud Platform
 
+----
+### 예상 UI
+![study together ui-1](https://github.com/user-attachments/assets/20e21201-660a-4f27-8969-4fe769f659cf)
+![study together ui (1)](https://github.com/user-attachments/assets/307e5c05-ee1c-4598-830b-1728b484f22b)
+![study together ui (2)](https://github.com/user-attachments/assets/466b91fe-c87c-448c-8397-06ecc53b8046)
+![study together ui (3)](https://github.com/user-attachments/assets/1d0ea8ef-7c86-4432-bfef-857fb13f5a00)
 
 ---
 
