@@ -10,8 +10,7 @@
 
 ----
 ### 예상 UI
-![프레젠테이션2](https://github.com/user-attachments/assets/c4edf1e5-e4a1-4ee3-910b-d7f385347c93)
-![프레젠테이션2-](https://github.com/user-attachments/assets/c8d247d5-cdb4-4642-9842-aac495e8dedc)
+![프레젠테이션1](https://github.com/user-attachments/assets/68326d54-c492-4c49-9e50-d9f0e9418be6)
 
 ---
 
