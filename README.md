@@ -1,4 +1,4 @@
-## 💻 Study Together
+# 💻 Study Together
 
 ### 소개
 
@@ -47,6 +47,8 @@
 
 **✔️ JPA 도입 과정** 
 
+**`목표: 단순 JPA의 편리함에 치중한 것이 아닌, 내부 동작 이해 및 성능에 관한 고민`**
+
 - [JpaRepository.save() 안티패턴에 대한 고찰](https://dev-wooni.tistory.com/9)
 
 - [일대다 단방향 매핑이 불러오는 성능 비효율에 관한 고민](https://dev-wooni.tistory.com/12)
@@ -56,7 +58,9 @@
 
 **✔️ Event-Driven Architecture**
 
-- [이벤트 기반 아키텍처가 필요한 이유 및 Transactional Outbox 패턴을 통한 메시지 발행 보장](https://dev-wooni.tistory.com/13)
+**`목표: 변경사항에 유연한 시스템 만들기`**
+
+- [EDA 도입 이유 및 Transactional Outbox 패턴을 통한 메시지 발행 보장](https://dev-wooni.tistory.com/13)
 
 - [Event 확장성 고민, 추상화로 해결하기 : 이벤트 동적 매핑 하는 방법](https://dev-wooni.tistory.com/14)
 
