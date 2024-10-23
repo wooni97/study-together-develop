@@ -9,6 +9,11 @@
 함께 모여 코드 에디터를 통해 같이 코딩하고, 채팅으로 대화할 수 있습니다.
 
 ----
+### 예상 UI
+![프레젠테이션2](https://github.com/user-attachments/assets/c4edf1e5-e4a1-4ee3-910b-d7f385347c93)
+![프레젠테이션2-](https://github.com/user-attachments/assets/c8d247d5-cdb4-4642-9842-aac495e8dedc)
+
+---
 
 ### 사용 기술
 - **JDK** : Java17
