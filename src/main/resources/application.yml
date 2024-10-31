@@ -9,9 +9,17 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://db-pptd5-kr.vpc-pub-cdb.ntruss.com:3306/study-together?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
-    username: application
-    password: application123!
+    url: jdbc:mysql://180.67.148.118:3306/STUDY_TOGETHER?useSSL=false&serverTimezone=UTC
+    username : root
+    password : root
+#    url: jdbc:mysql://db-pptd5-kr.vpc-pub-cdb.ntruss.com:3306/study-together?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
+#    username: local
+#    password: local123!
+
+  redis:
+    host: localhost
+    port: 6379
+
   sql:
     init:
       mode: always
