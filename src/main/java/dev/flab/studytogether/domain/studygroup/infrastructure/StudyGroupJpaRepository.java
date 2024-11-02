@@ -12,7 +12,6 @@ import java.util.Optional;
 
 public interface StudyGroupJpaRepository extends JpaRepository<StudyGroup, Long> {
     @EntityGraph(attributePaths = {"participants.participants"})
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
     Optional<StudyGroup> findById(long id);
     List<StudyGroup> findByActivateStatus(ActivateStatus status);
 }
