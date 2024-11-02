@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Embeddable
 @NoArgsConstructor
@@ -43,5 +40,12 @@ public class ParticipantsV2 {
     public boolean hasParticipant(Long memberId) {
         return participants.stream()
                     .anyMatch(participant -> participant.getMemberId().equals(memberId));
+    }
+
+    public List<ParticipantV2> getLastNEntries(int n) {
+        return participants.stream()
+                .sorted(Comparator.comparing(ParticipantV2::getJoinedAt).reversed())
+                .limit(n)
+                .toList();
     }
 }
