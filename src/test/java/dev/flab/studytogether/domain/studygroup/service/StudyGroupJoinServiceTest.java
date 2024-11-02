@@ -1,6 +1,7 @@
 package dev.flab.studytogether.domain.studygroup.service;
 
 import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
+import dev.flab.studytogether.domain.studygroup.exception.StudyGroupNotFoundException;
 import dev.flab.studytogether.domain.studygroup.repository.StudyGroupRepository;
 import dev.flab.studytogether.util.TestFixtureUtils;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,11 +38,10 @@ class StudyGroupJoinServiceTest {
 
         int beforeExitParticipantsCount = studyGroup.getParticipants().getCurrentParticipantsCount();
 
-        StudyGroup savedStudyGroup = studyGroupJoinService.joinGroup(roomId, memberId);
-
+        studyGroupJoinService.joinGroup(roomId, memberId);
 
         //then
-        assertThat(savedStudyGroup.getParticipants().getCurrentParticipantsCount())
+        assertThat(studyGroup.getParticipants().getCurrentParticipantsCount())
                 .isEqualTo(beforeExitParticipantsCount + 1);
 
     }
@@ -59,7 +58,7 @@ class StudyGroupJoinServiceTest {
                 .willReturn(Optional.empty());
 
         //then
-        assertThrows(NoSuchElementException.class,
+        assertThrows(StudyGroupNotFoundException.class,
                 () -> studyGroupJoinService.joinGroup(roomId, memberId));
     }
 }
