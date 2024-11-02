@@ -90,6 +90,10 @@ public class StudyGroup {
                 .min(Comparator.comparing(ParticipantV2::getJoinedAt));
     }
 
+    public int getCurrentParticipantsCount() {
+        return this.participants.getCurrentParticipantsCount();
+    }
+
     public boolean isGroupManager(Long participantId) {
         return this.groupManager.getId().equals(participantId);
     }
