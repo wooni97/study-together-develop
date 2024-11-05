@@ -4,9 +4,7 @@ import dev.flab.studytogether.domain.member.dto.MemberLoginRequestDto;
 import dev.flab.studytogether.domain.member.dto.MemberV2Response;
 import dev.flab.studytogether.domain.member.entity.MemberV2;
 import dev.flab.studytogether.domain.member.service.MemberV2Service;
-import dev.flab.studytogether.utils.SessionUtil;
 import dev.flab.studytogether.utils.SessionUtilV2;
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/api/membersV2")
+@RequestMapping("/api/v2/members")
 @AllArgsConstructor
 public class MemberV2ApiController {
     private final MemberV2Service memberService;
