@@ -3,7 +3,7 @@ name: CI/CD
 
 on:
   push:
-    branches: ["main", "feature/68"]
+    branches: ["main"]
 
 jobs:
   build:
