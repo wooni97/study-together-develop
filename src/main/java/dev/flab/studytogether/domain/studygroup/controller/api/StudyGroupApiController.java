@@ -18,7 +18,7 @@ public class StudyGroupApiController {
     private final StudyGroupJoinService studyGroupJoinService;
 
     @PostMapping("/v1/join")
-    @Operation(summary = "Create Study Group", description = "스터디 그룹 생성")
+    @Operation(summary = "Join Study Group", description = "스터디 그룹 참여")
     @ResponseStatus(HttpStatus.OK)
     public void join(
             @RequestParam(name = "groupId") Long groupId,
