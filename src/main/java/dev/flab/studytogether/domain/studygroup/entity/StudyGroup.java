@@ -68,7 +68,7 @@ public class StudyGroup {
 
 
     public boolean isGroupFull() {
-        return this.maxParticipants == participants.getCurrentParticipantsCount();
+        return this.maxParticipants <= participants.getCurrentParticipantsCount();
     }
 
     public void changeGroupManager(){
