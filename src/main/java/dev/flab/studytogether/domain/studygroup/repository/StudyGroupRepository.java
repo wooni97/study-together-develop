@@ -10,4 +10,5 @@ public interface StudyGroupRepository {
     StudyGroup save(StudyGroup studyGroup);
     Optional<StudyGroup> findById(long id);
     List<StudyGroup> findByActivateStatus(ActivateStatus status);
+    List<Long> findParticipantIdsWithinLimit(StudyGroup studyGroup);
 }
