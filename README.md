@@ -79,6 +79,7 @@
 
 **`진행 상황`**
 - [Pessimistic Lock 사용 및 성능 테스트 결과](https://github.com/wooni97/StudyTogether/pull/18)
+- [Lock 없이 WebSocket 기반의 결과적 일관성 구현](https://github.com/wooni97/StudyTogether/pull/19)
 
 ---
 ### 예상 UI
