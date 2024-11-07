@@ -56,7 +56,7 @@ public class StudyGroup {
 
     public void exitGroup(Long memberId, Long participantId) {
         if(!isMemberExists(memberId)) {
-            throw new MemberNotFoundInGroupException(this.id, memberId);
+            throw new ParticipantWithMemberIdNotFoundInGroupException(this.id, memberId);
         }
 
         if(isGroupManager(participantId)) {
