@@ -1,4 +1,4 @@
-package dev.flab.studytogether.domain.event.infrastructure;
+package dev.flab.studytogether.domain.event.infrastructure.eventListener;
 
 import dev.flab.studytogether.domain.event.EventListener;
 import dev.flab.studytogether.domain.member.event.MemberV2SignUpEvent;
