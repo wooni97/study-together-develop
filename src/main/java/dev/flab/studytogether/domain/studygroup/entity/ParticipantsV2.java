@@ -23,16 +23,6 @@ public class ParticipantsV2 {
         participants.add(participant);
     }
 
-    public void removeParticipant(Long participantId) {
-        ParticipantV2 removeParticipant = participants.stream()
-                .filter(participant -> participantId.equals(participant.getId()))
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("현재 StudyGroup에 존재하지 않는 참여자입니다."));
-
-
-        participants.remove(removeParticipant);
-    }
-
     public int getCurrentParticipantsCount() {
         return participants.size();
     }
@@ -42,10 +32,15 @@ public class ParticipantsV2 {
                     .anyMatch(participant -> participant.getMemberId().equals(memberId));
     }
 
-    public List<ParticipantV2> getLastNEntries(int n) {
+    public Optional<ParticipantV2> findParticipantByMemberId(Long memberId) {
         return participants.stream()
-                .sorted(Comparator.comparing(ParticipantV2::getJoinedAt).reversed())
-                .limit(n)
-                .toList();
+                .filter(participant -> memberId.equals(participant.getMemberId()))
+                .findFirst();
+    }
+
+    public Optional<ParticipantV2> findParticipantByParticipantId(Long participantId) {
+        return participants.stream()
+                .filter(participant -> participantId.equals(participant.getId()))
+                .findFirst();
     }
 }
