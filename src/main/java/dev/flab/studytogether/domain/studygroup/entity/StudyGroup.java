@@ -42,7 +42,8 @@ public class StudyGroup {
             throw new MemberAlreadyExistsInGroupException("이미 StudyGroup에 존재하는 유저입니다.");
 
         if(isGroupFull())
-            throw new GroupCapacityExceededException("Study Group ID : " + this.id +
+            throw new GroupCapacityExceededException(
+                    "Study Group ID : " + this.id +
                     " 정원이 다 찬 관계로 Member ID : " + participant.getMemberId() + " 입장 실패.");
 
         participants.addParticipant(participant);
