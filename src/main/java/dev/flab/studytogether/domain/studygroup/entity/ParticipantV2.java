@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Where(clause = "is_participating = true")
+@Where(clause = "participant_status = JOINED")
 public class ParticipantV2 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,14 +20,19 @@ public class ParticipantV2 {
     private Long memberId;
     @Enumerated(EnumType.STRING)
     private Role participantRole;
-    private Boolean isParticipating;
+    @Enumerated(EnumType.STRING)
+    private ParticipantStatus participantStatus;
     private LocalDateTime joinedAt;
 
-    public ParticipantV2(StudyGroup studyGroup, Long memberId, Role participantRole, LocalDateTime joinedAt) {
+    public ParticipantV2(StudyGroup studyGroup,
+                         Long memberId,
+                         Role participantRole,
+                         ParticipantStatus participantStatus,
+                         LocalDateTime joinedAt) {
         this.studyGroup = studyGroup;
         this.memberId = memberId;
         this.participantRole = participantRole;
-        this.isParticipating = true;
+        this.participantStatus = participantStatus;
         this.joinedAt = joinedAt;
     }
 
@@ -37,8 +42,8 @@ public class ParticipantV2 {
         this.participantRole = participantRole;
     }
 
-    public void changeParticipatingStatus(Boolean status) {
-        this.isParticipating = status;
+    public void changeParticipatingStatus(ParticipantStatus participantStatus) {
+        this.participantStatus = participantStatus;
     }
 
     @Getter
@@ -48,6 +53,18 @@ public class ParticipantV2 {
         ORDINARY_PARTICIPANT("Ordinary Participant");
 
         private final String roleDescription;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public enum ParticipantStatus {
+        WAITING("입장 대기"),
+        JOINED("입장 완료"),
+        LIMITED("입장 제한"),
+        EXIT_WAITING("퇴장 대기"),
+        EXITED("퇴장 완료");
+
+        private final String description;
     }
 
 }
