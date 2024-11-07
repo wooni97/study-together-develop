@@ -63,7 +63,8 @@ public class StudyGroup {
             changeGroupManager();
         }
 
-        participants.removeParticipant(participantId);
+        ParticipantV2 exitingParticipant = getParticipantByMemberId(memberId);
+        exitingParticipant.changeParticipatingStatus(ParticipantV2.ParticipantStatus.EXITED);
     }
 
 
