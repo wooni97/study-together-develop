@@ -102,6 +102,19 @@ public class StudyGroup {
         return participants.hasParticipant(memberId);
     }
 
+    public ParticipantV2 getParticipantByMemberId(Long memberId) {
+        return participants.findParticipantByMemberId(memberId)
+                .orElseThrow(() ->
+                        new ParticipantWithMemberIdNotFoundInGroupException(id, memberId));
+    }
+
+    public ParticipantV2 getParticipantByParticipantId(Long participantId) {
+        return participants.findParticipantByParticipantId(participantId)
+                .orElseThrow(() ->
+                        new ParticipantWithIdNotFoundInGroupException(id, participantId));
+
+    }
+
     private void changeParticipantRole(Long participantId, ParticipantV2.Role roleToChange) {
         participants.getParticipants().stream()
                 .filter(p -> p.getId().equals(participantId))
