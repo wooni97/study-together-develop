@@ -1,5 +1,6 @@
 package dev.flab.studytogether.domain.studygroup.service;
 
+import dev.flab.studytogether.domain.event.EventRepository;
 import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
 import dev.flab.studytogether.domain.studygroup.exception.StudyGroupNotFoundException;
 import dev.flab.studytogether.domain.studygroup.repository.StudyGroupRepository;
@@ -23,6 +24,8 @@ class StudyGroupJoinServiceTest {
     private StudyGroupJoinService studyGroupJoinService;
     @Mock
     private StudyGroupRepository studyGroupRepository;
+    @Mock
+    private EventRepository eventRepository;
 
     @Test
     @DisplayName("Syudy Group에서 참가자가 입장할 때, 참가자 수가 증가")
