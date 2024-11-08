@@ -8,6 +8,7 @@ import dev.flab.studytogether.domain.studygroup.exception.StudyGroupNotFoundExce
 import dev.flab.studytogether.domain.studygroup.repository.StudyGroupRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -16,6 +17,7 @@ public class StudyGroupExitProcessStartService {
     private final StudyGroupRepository studyGroupRepository;
     private final EventRepository eventRepository;
 
+    @Transactional
     public StudyGroup studyGroupExitProcessStart(Long roomId, Long memberId, Long participantId) {
         StudyGroup studyGroup = studyGroupRepository.findById(roomId)
                 .orElseThrow(() -> new StudyGroupNotFoundException(roomId));

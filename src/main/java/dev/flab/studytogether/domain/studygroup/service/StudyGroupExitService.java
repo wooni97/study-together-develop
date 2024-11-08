@@ -6,13 +6,15 @@ import dev.flab.studytogether.domain.studygroup.exception.StudyGroupNotFoundExce
 import dev.flab.studytogether.domain.studygroup.repository.StudyGroupRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service 
 @AllArgsConstructor
 public class StudyGroupExitService {
     
     private final StudyGroupRepository studyGroupRepository;
-    
+
+    @Transactional
     public void exitGroup(Long studyGroupId, Long participantId) {
         StudyGroup studyGroup = studyGroupRepository.findById(studyGroupId)
                 .orElseThrow(() ->
