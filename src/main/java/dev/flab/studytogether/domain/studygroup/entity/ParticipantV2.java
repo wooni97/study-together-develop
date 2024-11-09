@@ -2,14 +2,12 @@ package dev.flab.studytogether.domain.studygroup.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Where(clause = "participant_status = JOINED")
 public class ParticipantV2 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,10 +56,7 @@ public class ParticipantV2 {
     @Getter
     @AllArgsConstructor
     public enum ParticipantStatus {
-        WAITING("입장 대기"),
         JOINED("입장 완료"),
-        LIMITED("입장 제한"),
-        EXIT_WAITING("퇴장 대기"),
         EXITED("퇴장 완료");
 
         private final String description;
