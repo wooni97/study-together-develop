@@ -20,7 +20,7 @@ public class StudyGroupExitService {
                 .orElseThrow(() ->
                         new StudyGroupNotFoundException(studyGroupId));
 
-        ParticipantV2 participant = studyGroup.getParticipantByParticipantId(participantId);
+        ParticipantV2 participant = studyGroup.getJoinedParticipantByParticipantId(participantId);
 
         studyGroup.exitGroup(participant.getMemberId(), participant.getId());
 
