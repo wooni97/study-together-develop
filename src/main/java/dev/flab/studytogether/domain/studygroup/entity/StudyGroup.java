@@ -5,8 +5,6 @@ import dev.flab.studytogether.domain.studygroup.exception.*;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.Comparator;
-import java.util.Optional;
 
 @Entity
 @Getter
@@ -38,7 +36,7 @@ public class StudyGroup {
             throw new TerminatedGroupJoinException("종료된 Study Group에는 입장할 수 없습니다.");
         }
 
-        if(isMemberExists(participant.getMemberId()))
+        if(isMemberJoined(participant.getMemberId()))
             throw new MemberAlreadyExistsInGroupException("이미 StudyGroup에 존재하는 유저입니다.");
 
         if(isGroupFull())
@@ -56,7 +54,7 @@ public class StudyGroup {
     }
 
     public void exitGroup(Long memberId, Long participantId) {
-        if(!isMemberExists(memberId)) {
+        if(!isMemberJoined(memberId)) {
             throw new ParticipantWithMemberIdNotFoundInGroupException(this.id, memberId);
         }
 
@@ -64,18 +62,18 @@ public class StudyGroup {
             changeGroupManager();
         }
 
-        ParticipantV2 exitingParticipant = getParticipantByMemberId(memberId);
+        ParticipantV2 exitingParticipant = getJoinedParticipantByMemberId(memberId);
         exitingParticipant.changeParticipatingStatus(ParticipantV2.ParticipantStatus.EXITED);
     }
 
 
     public boolean isGroupFull() {
-        return this.maxParticipants <= participants.getCurrentParticipantsCount();
+        return this.maxParticipants <= participants.getCurrentJoinedParticipantsCount();
     }
 
     public void changeGroupManager(){
         ParticipantV2 currentRoomManager = this.groupManager;
-        ParticipantV2 nextRoomManager = findNextManager()
+        ParticipantV2 nextRoomManager = participants.findNextManager()
                 .orElseThrow(() -> new NoParticipantForManagerDelegateException("방장 권한을 위임할 사용자가 존재하지 않습니다."));
 
         changeParticipantRole(currentRoomManager.getId(), ParticipantV2.Role.ORDINARY_PARTICIPANT);
@@ -84,44 +82,29 @@ public class StudyGroup {
         this.groupManager = nextRoomManager;
     }
 
-    private Optional<ParticipantV2> findNextManager() {
-        return participants.getParticipants()
-                .stream()
-                .filter(participant ->
-                        !participant.getParticipantRole().equals(ParticipantV2.Role.GROUP_MANAGER))
-                .min(Comparator.comparing(ParticipantV2::getJoinedAt));
-    }
-
-    public int getCurrentParticipantsCount() {
-        return this.participants.getCurrentParticipantsCount();
-    }
-
     public boolean isGroupManager(Long participantId) {
         return this.groupManager.getId().equals(participantId);
     }
 
-    public boolean isMemberExists(Long memberId) {
-        return participants.hasParticipant(memberId);
+    public boolean isMemberJoined(Long memberId) {
+        return participants.isMemberJoined(memberId);
     }
 
-    public ParticipantV2 getParticipantByMemberId(Long memberId) {
-        return participants.findParticipantByMemberId(memberId)
+    public ParticipantV2 getJoinedParticipantByMemberId(Long memberId) {
+        return participants.findJoinedParticipantByMemberId(memberId)
                 .orElseThrow(() ->
                         new ParticipantWithMemberIdNotFoundInGroupException(id, memberId));
     }
 
-    public ParticipantV2 getParticipantByParticipantId(Long participantId) {
-        return participants.findParticipantByParticipantId(participantId)
+    public ParticipantV2 getJoinedParticipantByParticipantId(Long participantId) {
+        return participants.findJoinedParticipantByParticipantId(participantId)
                 .orElseThrow(() ->
                         new ParticipantWithIdNotFoundInGroupException(id, participantId));
 
     }
 
     private void changeParticipantRole(Long participantId, ParticipantV2.Role roleToChange) {
-        participants.getParticipants().stream()
-                .filter(p -> p.getId().equals(participantId))
-                .findFirst()
-                .ifPresent(p -> p.changeRole(roleToChange));
+        getJoinedParticipantByParticipantId(participantId).changeRole(roleToChange);
     }
 
 }
