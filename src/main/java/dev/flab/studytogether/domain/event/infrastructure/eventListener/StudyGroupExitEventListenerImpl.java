@@ -5,9 +5,11 @@ import dev.flab.studytogether.domain.studygroup.event.StudyGroupExitEvent;
 import dev.flab.studytogether.domain.studygroup.service.StudyGroupExitService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class StudyGroupExitEventListenerImpl implements EventListener<StudyGroupExitEvent> {
 
     private final StudyGroupExitService studyGroupExitService;
