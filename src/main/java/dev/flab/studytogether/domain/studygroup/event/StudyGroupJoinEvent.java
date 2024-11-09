@@ -8,24 +8,24 @@ import java.time.LocalDateTime;
 @Getter
 public class StudyGroupJoinEvent extends DomainEvent {
     private final Long studyGroupId;
-    private final Long participantId;
+    private final Long memberId;
 
-    private StudyGroupJoinEvent(Long studyGroupId, Long participantId) {
+    private StudyGroupJoinEvent(Long studyGroupId, Long memberId) {
         super(LocalDateTime.now());
         this.studyGroupId = studyGroupId;
-        this.participantId = participantId;
+        this.memberId = memberId;
     }
-    private StudyGroupJoinEvent(Long studyGroupId, LocalDateTime createdAt, Long participantId) {
+    private StudyGroupJoinEvent(Long studyGroupId, LocalDateTime createdAt, Long memberId) {
         super(createdAt);
         this.studyGroupId = studyGroupId;
-        this.participantId = participantId;
+        this.memberId = memberId;
     }
 
-    public static StudyGroupJoinEvent createNewEvent(Long studyGroupId, Long participantId) {
-        return new StudyGroupJoinEvent(studyGroupId, participantId);
+    public static StudyGroupJoinEvent createNewEvent(Long studyGroupId, Long memberId) {
+        return new StudyGroupJoinEvent(studyGroupId, memberId);
     }
 
-    public static StudyGroupJoinEvent createFromExisting(Long studyGroupId, Long participantId, LocalDateTime createdAt) {
-        return new StudyGroupJoinEvent(studyGroupId, createdAt, participantId);
+    public static StudyGroupJoinEvent createFromExisting(Long studyGroupId, Long memberId, LocalDateTime createdAt) {
+        return new StudyGroupJoinEvent(studyGroupId, createdAt, memberId);
     }
 }
