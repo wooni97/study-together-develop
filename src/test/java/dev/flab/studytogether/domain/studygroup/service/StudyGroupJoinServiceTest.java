@@ -39,12 +39,12 @@ class StudyGroupJoinServiceTest {
         given(studyGroupRepository.findById(roomId))
                 .willReturn(Optional.of(studyGroup));
 
-        int beforeExitParticipantsCount = studyGroup.getParticipants().getCurrentParticipantsCount();
+        int beforeExitParticipantsCount = studyGroup.getParticipants().getCurrentJoinedParticipantsCount();
 
         studyGroupJoinService.joinGroup(roomId, memberId);
 
         //then
-        assertThat(studyGroup.getParticipants().getCurrentParticipantsCount())
+        assertThat(studyGroup.getParticipants().getCurrentJoinedParticipantsCount())
                 .isEqualTo(beforeExitParticipantsCount + 1);
 
     }
