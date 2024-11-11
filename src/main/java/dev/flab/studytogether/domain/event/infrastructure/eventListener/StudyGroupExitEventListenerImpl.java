@@ -26,7 +26,7 @@ public class StudyGroupExitEventListenerImpl implements EventListener<StudyGroup
                     event.getStudyGroupId(),
                     event.getParticipantId());
         } catch (NoParticipantForManagerDelegateException e) {
-            log.error("error : {} , message : {}", e.getClass(), e.getMessage());
+            log.info("error : {} , message : {}", e.getClass(), e.getMessage());
         }
 
     }

@@ -27,7 +27,7 @@ public class StudyGroupJoinEventListenerImpl implements EventListener<StudyGroup
                     event.getStudyGroupId(),
                     event.getMemberId());
         } catch(GroupCapacityExceededException | TerminatedGroupJoinException e) {
-            log.error("error : {} message : {}", e.getClass(), e.getMessage());
+            log.info("error : {} message : {}", e.getClass(), e.getMessage());
         }
     }
 }
