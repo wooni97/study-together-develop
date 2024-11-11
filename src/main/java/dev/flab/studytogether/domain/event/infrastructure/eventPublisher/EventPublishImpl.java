@@ -1,4 +1,4 @@
-package dev.flab.studytogether.domain.event.infrastructure;
+package dev.flab.studytogether.domain.event.infrastructure.eventPublisher;
 
 import dev.flab.studytogether.domain.event.DomainEvent;
 import dev.flab.studytogether.domain.event.EventPublish;

@@ -2,14 +2,12 @@ package dev.flab.studytogether.domain.studygroup.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Where(clause = "is_participating = true")
 public class ParticipantV2 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,14 +18,19 @@ public class ParticipantV2 {
     private Long memberId;
     @Enumerated(EnumType.STRING)
     private Role participantRole;
-    private Boolean isParticipating;
+    @Enumerated(EnumType.STRING)
+    private ParticipantStatus participantStatus;
     private LocalDateTime joinedAt;
 
-    public ParticipantV2(StudyGroup studyGroup, Long memberId, Role participantRole, LocalDateTime joinedAt) {
+    public ParticipantV2(StudyGroup studyGroup,
+                         Long memberId,
+                         Role participantRole,
+                         ParticipantStatus participantStatus,
+                         LocalDateTime joinedAt) {
         this.studyGroup = studyGroup;
         this.memberId = memberId;
         this.participantRole = participantRole;
-        this.isParticipating = true;
+        this.participantStatus = participantStatus;
         this.joinedAt = joinedAt;
     }
 
@@ -37,8 +40,8 @@ public class ParticipantV2 {
         this.participantRole = participantRole;
     }
 
-    public void changeParticipatingStatus(Boolean status) {
-        this.isParticipating = status;
+    public void changeParticipatingStatus(ParticipantStatus participantStatus) {
+        this.participantStatus = participantStatus;
     }
 
     @Getter
@@ -48,6 +51,15 @@ public class ParticipantV2 {
         ORDINARY_PARTICIPANT("Ordinary Participant");
 
         private final String roleDescription;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public enum ParticipantStatus {
+        JOINED("입장 완료"),
+        EXITED("퇴장 완료");
+
+        private final String description;
     }
 
 }
