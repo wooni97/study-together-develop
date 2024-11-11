@@ -67,10 +67,6 @@ dependencies {
 
     // Relection
     implementation group: 'org.reflections', name: 'reflections', version: '0.9.10'
-
-    //Redis
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation group: 'org.redisson', name: 'redisson-spring-boot-starter', version: '3.37.0'
 }
 
 tasks.named('test') {
