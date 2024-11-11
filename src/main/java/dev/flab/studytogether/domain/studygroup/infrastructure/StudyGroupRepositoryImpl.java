@@ -1,18 +1,19 @@
 package dev.flab.studytogether.domain.studygroup.infrastructure;
 
-import dev.flab.studytogether.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
 import dev.flab.studytogether.domain.studygroup.repository.StudyGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class StudyGroupRepositoryImpl implements StudyGroupRepository {
     @Autowired
-    StudyGroupJpaRepository studyGroupJpaRepository;
+    private StudyGroupJpaRepository studyGroupJpaRepository;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public StudyGroup save(StudyGroup studyGroup) {
@@ -22,10 +23,5 @@ public class StudyGroupRepositoryImpl implements StudyGroupRepository {
     @Override
     public Optional<StudyGroup> findById(long id) {
         return studyGroupJpaRepository.findById(id);
-    }
-
-    @Override
-    public List<StudyGroup> findByActivateStatus(ActivateStatus status) {
-        return studyGroupJpaRepository.findByActivateStatus(status);
     }
 }

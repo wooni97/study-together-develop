@@ -22,7 +22,7 @@ public class EventConsumer {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final EventPublish eventPublish;
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 3000)
     public void consume() {
         List<EventDto> eventDtos = findAll();
 
