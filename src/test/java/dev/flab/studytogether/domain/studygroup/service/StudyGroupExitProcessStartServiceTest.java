@@ -2,59 +2,56 @@ package dev.flab.studytogether.domain.studygroup.service;
 
 import dev.flab.studytogether.domain.event.EventRepository;
 import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
+import dev.flab.studytogether.domain.studygroup.exception.ParticipantWithMemberIdNotFoundInGroupException;
 import dev.flab.studytogether.domain.studygroup.exception.StudyGroupNotFoundException;
 import dev.flab.studytogether.domain.studygroup.repository.StudyGroupRepository;
 import dev.flab.studytogether.util.TestFixtureUtils;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
-class StudyGroupJoinServiceTest {
+class StudyGroupExitProcessStartServiceTest {
     @InjectMocks
-    private StudyGroupJoinService studyGroupJoinService;
+    private StudyGroupExitProcessStartService studyGroupExitProcessStartService;
     @Mock
     private StudyGroupRepository studyGroupRepository;
     @Mock
     private EventRepository eventRepository;
 
     @Test
-    @DisplayName("Syudy Group에서 참가자가 입장할 때, 참가자 수가 증가")
-    void testJoinGroup() {
+    @DisplayName("Study Group 퇴장 이벤트 발행 시, 해당 참여자가 Study Group에 존재하지 않는 회원이면 예외 반환.")
+    void testExitGroup() {
         //given
         Long roomId = 1L;
-        Long memberId = 1L;
+        Long participantId = 3L;
+        Long memberId = 4L;
 
         //when
-        StudyGroup studyGroup = TestFixtureUtils.randomStudyGroup();
+        StudyGroup studyGroup = TestFixtureUtils.randomStudyGroupWithParticipants();
         given(studyGroupRepository.findById(roomId))
                 .willReturn(Optional.of(studyGroup));
 
-        int beforeExitParticipantsCount = studyGroup.getParticipants().getCurrentJoinedParticipantsCount();
-
-        studyGroupJoinService.joinGroup(roomId, memberId);
-
         //then
-        assertThat(studyGroup.getParticipants().getCurrentJoinedParticipantsCount())
-                .isEqualTo(beforeExitParticipantsCount + 1);
-
+        assertThrows(ParticipantWithMemberIdNotFoundInGroupException.class,
+                () -> studyGroupExitProcessStartService.studyGroupExitProcessStart(roomId, participantId, memberId));
     }
 
     @Test
     @DisplayName("존재하지 않는 Study Group Id인 경우 NoSuchElementException 예외 발생")
-    void testJoinGroup2() {
+    void testExitGroup2() {
         //given
         Long roomId = 1L;
-        Long memberId = 1L;
+        Long participantId = 2L;
+        Long memberId = 2L;
 
         //when
         given(studyGroupRepository.findById(roomId))
@@ -62,6 +59,6 @@ class StudyGroupJoinServiceTest {
 
         //then
         assertThrows(StudyGroupNotFoundException.class,
-                () -> studyGroupJoinService.joinGroup(roomId, memberId));
+                () -> studyGroupExitProcessStartService.studyGroupExitProcessStart(roomId, participantId, memberId));
     }
 }

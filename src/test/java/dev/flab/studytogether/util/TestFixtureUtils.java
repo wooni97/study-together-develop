@@ -36,6 +36,7 @@ public class TestFixtureUtils {
         ParticipantV2 manager = new ParticipantV2(studyGroup,
                 1L,
                 ParticipantV2.Role.GROUP_MANAGER,
+                ParticipantV2.ParticipantStatus.JOINED,
                 LocalDateTime.of(2023, 1, 2, 4, 5));
 
         ReflectionTestUtils.setField(manager, "id", 1L);
@@ -45,6 +46,7 @@ public class TestFixtureUtils {
         ParticipantV2 participant = new ParticipantV2(studyGroup,
                 2L,
                 ParticipantV2.Role.ORDINARY_PARTICIPANT,
+                ParticipantV2.ParticipantStatus.JOINED,
                 LocalDateTime.of(2023, 2, 1, 2, 3, 55));
 
         ReflectionTestUtils.setField(participant, "id", 2L);
