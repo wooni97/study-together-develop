@@ -13,15 +13,17 @@ public class ChatMessage {
     private Long id;
     private Long chatId;
     private Long memberId;
+    private String memberNickName;
     private String content;
     private LocalDateTime messageSentTime;
 
     protected ChatMessage() {}
 
-    public ChatMessage(Long id, Long chatId, Long memberId, String content, LocalDateTime messageSentTime) {
+    public ChatMessage(Long id, Long chatId, Long memberId, String memberNickName, String content, LocalDateTime messageSentTime) {
         this.id = id;
         this.chatId = chatId;
         this.memberId = memberId;
+        this.memberNickName = memberNickName;
         this.content = content;
         this.messageSentTime = messageSentTime;
     }
