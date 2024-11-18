@@ -1,5 +1,6 @@
 package dev.flab.studytogether.domain.studygroup.service;
 
+import dev.flab.studytogether.domain.chat.service.StudyGroupChatCreateService;
 import dev.flab.studytogether.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.domain.studygroup.entity.ParticipantV2;
 import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
@@ -13,7 +14,9 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class StudyGroupCreateService {
+
     private final StudyGroupRepository studyGroupRepository;
+    private final StudyGroupChatCreateService studyGroupChatCreateService;
 
     @Transactional
     public StudyGroup createGroup(String groupTitle, int maxParticipants, Long groupCreatorMemberId) {
@@ -29,6 +32,8 @@ public class StudyGroupCreateService {
 
         studyGroup.joinGroup(participant);
         studyGroupRepository.save(studyGroup);
+
+        studyGroupChatCreateService.createStudyGroupChat(studyGroup.getId());
 
         return studyGroup;
     }
