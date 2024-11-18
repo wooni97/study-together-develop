@@ -15,14 +15,14 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer{
                 .setAllowedOrigins("http://localhost:8080")
                 .withSockJS();
 
-        registry.addEndpoint("/studyGroup")
+        registry.addEndpoint("/chat")
                 .setAllowedOrigins("*")
                 .withSockJS();
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-           config.enableSimpleBroker("/topic", "/queue", "/subscribe");
+           config.enableSimpleBroker("/queue", "/subscribe");
            config.setApplicationDestinationPrefixes("/publish");
     }
 
