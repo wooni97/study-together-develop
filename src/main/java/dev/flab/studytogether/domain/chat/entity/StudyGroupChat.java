@@ -10,12 +10,14 @@ import java.time.LocalDateTime;
 @Getter
 @DiscriminatorValue("STUDY_GROUP_CHAT")
 public class StudyGroupChat extends Chat {
+
     private Long studyGroupId;
 
     protected StudyGroupChat() {}
 
-    public StudyGroupChat(Long id, LocalDateTime createdAt, Long studyGroupId) {
-        super(id, createdAt);
+    public StudyGroupChat(LocalDateTime createdAt, Long studyGroupId) {
+        super(createdAt);
         this.studyGroupId = studyGroupId;
     }
+
 }
