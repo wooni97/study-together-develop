@@ -17,8 +17,7 @@ public abstract class Chat {
 
     protected Chat() {}
 
-    public Chat(Long id, LocalDateTime createdAt) {
-        this.id = id;
+    protected Chat(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 }
