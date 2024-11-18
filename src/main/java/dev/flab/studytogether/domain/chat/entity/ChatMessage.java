@@ -3,6 +3,7 @@ package dev.flab.studytogether.domain.chat.entity;
 import lombok.Getter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,20 +12,16 @@ public class ChatMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private Long chatId;
+    @NotNull
     private Long memberId;
+    @NotNull
     private String memberNickName;
+    @NotNull
     private String content;
+    @NotNull
     private LocalDateTime messageSentTime;
 
     protected ChatMessage() {}
-
-    public ChatMessage(Long id, Long chatId, Long memberId, String memberNickName, String content, LocalDateTime messageSentTime) {
-        this.id = id;
-        this.chatId = chatId;
-        this.memberId = memberId;
-        this.memberNickName = memberNickName;
-        this.content = content;
-        this.messageSentTime = messageSentTime;
-    }
 }
