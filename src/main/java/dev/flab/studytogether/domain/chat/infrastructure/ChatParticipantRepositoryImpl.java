@@ -24,4 +24,9 @@ public class ChatParticipantRepositoryImpl implements ChatParticipantRepository 
     public Optional<ChatParticipant> findByChatIdAndMemberId(Long chatId, Long memberId) {
         return chatParticipantJpaRepository.findByChatIdAndMemberId(chatId, memberId);
     }
+
+    @Override
+    public void deleteByChatIdAndMemberId(Long chatId, Long memberId) {
+        chatParticipantJpaRepository.deleteByChatIdAndMemberId(chatId, memberId);
+    }
 }
