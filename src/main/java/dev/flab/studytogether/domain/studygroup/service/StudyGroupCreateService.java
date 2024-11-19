@@ -1,9 +1,10 @@
 package dev.flab.studytogether.domain.studygroup.service;
 
-import dev.flab.studytogether.domain.chat.service.StudyGroupChatCreateService;
+import dev.flab.studytogether.domain.event.EventPublish;
 import dev.flab.studytogether.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.domain.studygroup.entity.ParticipantV2;
 import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
+import dev.flab.studytogether.domain.studygroup.event.StudyGroupCreatedEvent;
 import dev.flab.studytogether.domain.studygroup.repository.StudyGroupRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 public class StudyGroupCreateService {
 
     private final StudyGroupRepository studyGroupRepository;
-    private final StudyGroupChatCreateService studyGroupChatCreateService;
+    private final EventPublish eventPublish;
 
     @Transactional
     public StudyGroup createGroup(String groupTitle, int maxParticipants, Long groupCreatorMemberId) {
@@ -33,7 +34,10 @@ public class StudyGroupCreateService {
         studyGroup.joinGroup(participant);
         studyGroupRepository.save(studyGroup);
 
-        studyGroupChatCreateService.createStudyGroupChat(studyGroup.getId());
+        StudyGroupCreatedEvent studyGroupCreatedEvent =
+                StudyGroupCreatedEvent.createNewEvent(studyGroup.getId());
+
+        eventPublish.publish(studyGroupCreatedEvent);
 
         return studyGroup;
     }
