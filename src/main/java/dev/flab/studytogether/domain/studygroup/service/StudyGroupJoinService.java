@@ -1,9 +1,5 @@
 package dev.flab.studytogether.domain.studygroup.service;
 
-import dev.flab.studytogether.domain.chat.entity.StudyGroupChat;
-import dev.flab.studytogether.domain.chat.exception.StudyGroupChatNotFoundException;
-import dev.flab.studytogether.domain.chat.repository.StudyGroupChatRepository;
-import dev.flab.studytogether.domain.chat.service.ChatEnterService;
 import dev.flab.studytogether.domain.studygroup.entity.ParticipantV2;
 import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
 import dev.flab.studytogether.domain.studygroup.exception.StudyGroupNotFoundException;
@@ -19,8 +15,6 @@ import java.time.LocalDateTime;
 public class StudyGroupJoinService {
 
     private final StudyGroupRepository studyGroupRepository;
-    private final StudyGroupChatRepository studyGroupChatRepository;
-    private final ChatEnterService chatEnterService;
 
     @Transactional
     public ParticipantV2 joinGroup(Long groupId, Long memberId) {
@@ -33,11 +27,6 @@ public class StudyGroupJoinService {
                 ParticipantV2.ParticipantStatus.JOINED,
                 LocalDateTime.now()));
         studyGroupRepository.save(studyGroup);
-
-        StudyGroupChat studyGroupChat = studyGroupChatRepository.findByStudyGroupId(groupId)
-                .orElseThrow(() -> new StudyGroupChatNotFoundException(groupId));
-
-        chatEnterService.chatEnter(studyGroupChat.getStudyGroupId(), memberId);
 
         return studyGroup.getJoinedParticipantByMemberId(memberId);
     }
