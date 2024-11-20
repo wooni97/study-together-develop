@@ -20,7 +20,7 @@ public class StudyGroupCreatedEventListenerImpl implements EventListener<StudyGr
 
 
     @Override
-    @org.springframework.context.event.EventListener(MemberV2SignUpEvent.class)
+    @org.springframework.context.event.EventListener(StudyGroupCreatedEvent.class)
     public void handleEvent(StudyGroupCreatedEvent event) {
         studyGroupChatCreateService.createStudyGroupChat(event.getStudyGroupId());
     }
