@@ -13,12 +13,13 @@ import java.time.LocalDateTime;
 @Service
 @AllArgsConstructor
 public class StudyGroupJoinService {
+
     private final StudyGroupRepository studyGroupRepository;
 
     @Transactional
-    public ParticipantV2 joinGroup(Long roomId, Long memberId) {
-        StudyGroup studyGroup = studyGroupRepository.findById(roomId)
-                .orElseThrow(() -> new StudyGroupNotFoundException(roomId));
+    public ParticipantV2 joinGroup(Long groupId, Long memberId) {
+        StudyGroup studyGroup = studyGroupRepository.findById(groupId)
+                .orElseThrow(() -> new StudyGroupNotFoundException(groupId));
 
         studyGroup.joinGroup(new ParticipantV2(studyGroup,
                 memberId,
