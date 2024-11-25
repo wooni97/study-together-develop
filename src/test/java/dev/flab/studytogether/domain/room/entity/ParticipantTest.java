@@ -1,8 +1,9 @@
 package dev.flab.studytogether.domain.room.entity;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
+import dev.flab.studytogether.core.domain.room.entity.Participant;
+import dev.flab.studytogether.core.domain.room.entity.ParticipantRole;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDateTime;

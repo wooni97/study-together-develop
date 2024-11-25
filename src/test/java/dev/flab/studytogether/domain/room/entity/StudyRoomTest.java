@@ -1,5 +1,6 @@
 package dev.flab.studytogether.domain.room.entity;
 
+import dev.flab.studytogether.core.domain.room.entity.*;
 import org.junit.jupiter.api.BeforeEach;
 import java.time.LocalDateTime;
 import java.util.List;

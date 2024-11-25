@@ -2,6 +2,7 @@ package dev.flab.studytogether.domain.member.entity;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.flab.studytogether.core.domain.member.entity.Member;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 

@@ -4,7 +4,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import dev.flab.studytogether.domain.member.entity.MemberV2;
+import dev.flab.studytogether.core.domain.member.entity.MemberV2;
+import dev.flab.studytogether.infra.repository.member.MemberV2JpaRepository;
 import dev.flab.studytogether.util.TestFixtureUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

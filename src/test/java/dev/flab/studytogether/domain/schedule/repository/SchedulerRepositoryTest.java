@@ -2,7 +2,9 @@ package dev.flab.studytogether.domain.schedule.repository;
 
 import static org.assertj.core.api.Assertions.*;
 
-import dev.flab.studytogether.domain.schedule.entity.Scheduler;
+import dev.flab.studytogether.core.domain.schedule.entity.Scheduler;
+import dev.flab.studytogether.core.domain.schedule.repository.SchedulerRepository;
+import dev.flab.studytogether.infra.repository.scheduler.SchedulerRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;

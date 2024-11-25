@@ -1,7 +1,7 @@
 package dev.flab.studytogether.websocket.handler;
 
-import dev.flab.studytogether.domain.chat.exception.ChatNotFoundException;
-import dev.flab.studytogether.domain.chat.exception.MemberNotFoundInChatException;
+import dev.flab.studytogether.core.domain.chat.exception.ChatNotFoundException;
+import dev.flab.studytogether.core.domain.chat.exception.MemberNotFoundInChatException;
 import dev.flab.studytogether.websocket.response.WebSocketErrorResponse;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.simp.annotation.SendToUser;

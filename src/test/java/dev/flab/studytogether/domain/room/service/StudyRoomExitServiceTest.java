@@ -2,7 +2,7 @@ package dev.flab.studytogether.domain.room.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dev.flab.studytogether.domain.room.entity.*;
+import dev.flab.studytogether.core.domain.room.entity.*;
 import dev.flab.studytogether.fakerepositories.FakeParticipantRepository;
 import dev.flab.studytogether.fakerepositories.FakeStudyRoomRepository;
 import org.junit.jupiter.api.BeforeEach;

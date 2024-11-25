@@ -2,6 +2,7 @@ package dev.flab.studytogether.enums;
 
 import static org.assertj.core.api.Assertions.*;
 
+import dev.flab.studytogether.core.domain.schedule.CompleteStatus;
 import org.junit.jupiter.api.*;
 
 class CompleteStatusTest {

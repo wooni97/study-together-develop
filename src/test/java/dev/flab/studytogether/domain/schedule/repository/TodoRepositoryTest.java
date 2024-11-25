@@ -3,9 +3,11 @@ package dev.flab.studytogether.domain.schedule.repository;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
-import dev.flab.studytogether.domain.schedule.entity.Scheduler;
-import dev.flab.studytogether.domain.schedule.entity.Todo;
-import dev.flab.studytogether.enums.CompleteStatus;
+import dev.flab.studytogether.core.domain.schedule.entity.Scheduler;
+import dev.flab.studytogether.core.domain.schedule.entity.Todo;
+import dev.flab.studytogether.core.domain.schedule.repository.TodoRepository;
+import dev.flab.studytogether.core.domain.schedule.CompleteStatus;
+import dev.flab.studytogether.infra.repository.scheduler.TodoRepositoryImpl;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;

@@ -1,7 +1,7 @@
 package dev.flab.studytogether.websocket.controller;
 
-import dev.flab.studytogether.domain.chat.entity.ChatMessage;
-import dev.flab.studytogether.domain.chat.service.ChatMessageHandlerService;
+import dev.flab.studytogether.core.domain.chat.entity.ChatMessage;
+import dev.flab.studytogether.core.domain.chat.service.ChatMessageHandlerService;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;

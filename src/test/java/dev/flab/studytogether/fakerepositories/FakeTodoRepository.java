@@ -1,9 +1,9 @@
 package dev.flab.studytogether.fakerepositories;
 
-import dev.flab.studytogether.domain.schedule.entity.Scheduler;
-import dev.flab.studytogether.domain.schedule.entity.Todo;
-import dev.flab.studytogether.domain.schedule.repository.TodoRepository;
-import dev.flab.studytogether.enums.CompleteStatus;
+import dev.flab.studytogether.core.domain.schedule.entity.Scheduler;
+import dev.flab.studytogether.core.domain.schedule.entity.Todo;
+import dev.flab.studytogether.core.domain.schedule.repository.TodoRepository;
+import dev.flab.studytogether.core.domain.schedule.CompleteStatus;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,7 +1,7 @@
 package dev.flab.studytogether.fakerepositories;
 
-import dev.flab.studytogether.domain.room.entity.ActivateStatus;
-import dev.flab.studytogether.domain.room.entity.StudyRoom;
+import dev.flab.studytogether.core.domain.room.entity.ActivateStatus;
+import dev.flab.studytogether.core.domain.room.entity.StudyRoom;
 import dev.flab.studytogether.domain.room.repository.StudyRoomRepository;
 
 import java.util.ArrayList;
