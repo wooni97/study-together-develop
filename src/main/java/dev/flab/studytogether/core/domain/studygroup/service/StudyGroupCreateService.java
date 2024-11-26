@@ -1,7 +1,6 @@
 package dev.flab.studytogether.core.domain.studygroup.service;
 
 import dev.flab.studytogether.core.domain.event.EventPublish;
-import dev.flab.studytogether.core.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.core.domain.studygroup.entity.ParticipantV2;
 import dev.flab.studytogether.core.domain.studygroup.entity.StudyGroup;
 import dev.flab.studytogether.core.domain.studygroup.event.StudyGroupCreatedEvent;
@@ -23,7 +22,7 @@ public class StudyGroupCreateService {
     public StudyGroup createGroup(String groupTitle, int maxParticipants, Long groupCreatorMemberId) {
         StudyGroup studyGroup = new StudyGroup(groupTitle,
                 maxParticipants,
-                ActivateStatus.ACTIVATED);
+                StudyGroup.ActivateStatus.ACTIVATED);
 
         ParticipantV2 participant = new ParticipantV2(studyGroup,
                 groupCreatorMemberId,
