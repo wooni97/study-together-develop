@@ -1,8 +1,6 @@
 package dev.flab.studytogether.core.domain.studygroup.entity;
 
-import dev.flab.studytogether.core.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.core.domain.studygroup.exception.*;
-import dev.flab.studytogether.domain.studygroup.exception.*;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -106,6 +104,11 @@ public class StudyGroup {
 
     private void changeParticipantRole(Long participantId, ParticipantV2.Role roleToChange) {
         getJoinedParticipantByParticipantId(participantId).changeRole(roleToChange);
+    }
+
+    public enum ActivateStatus {
+        ACTIVATED,
+        TERMINATED;
     }
 
 }

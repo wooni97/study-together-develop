@@ -4,7 +4,6 @@ import dev.flab.studytogether.core.domain.member.entity.EmailAuthentication;
 import dev.flab.studytogether.core.domain.member.entity.MemberV2;
 import dev.flab.studytogether.core.domain.member.exception.*;
 import dev.flab.studytogether.core.domain.member.event.MemberV2SignUpEvent;
-import dev.flab.studytogether.domain.member.exception.*;
 import dev.flab.studytogether.core.domain.member.repository.EmailAuthenticationRepository;
 import dev.flab.studytogether.core.domain.event.EventRepository;
 import dev.flab.studytogether.core.domain.member.repository.MemberV2Repository;
