@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface StudyGroupChatJpaRepository extends JpaRepository<StudyGroupChat, Long> {
-    Optional<StudyGroupChat> findByStudyGroupId(Long StudyGroupId);
+    Optional<StudyGroupChat> findByStudyGroupId(Long studyGroupId);
 }
