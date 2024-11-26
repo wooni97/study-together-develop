@@ -15,7 +15,16 @@ public class StudyGroupCreatedEvent extends DomainEvent {
         this.studyGroupId = studyGroupId;
     }
 
+    private StudyGroupCreatedEvent(Long studyGroupId, LocalDateTime cratedAt) {
+        super(cratedAt);
+        this.studyGroupId = studyGroupId;
+    }
+
     public static StudyGroupCreatedEvent createNewEvent(Long studyGroupId) {
         return new StudyGroupCreatedEvent(studyGroupId);
+    }
+
+    public static StudyGroupCreatedEvent createFromExisting(Long studyGroupId, LocalDateTime createdAt) {
+        return new StudyGroupCreatedEvent(studyGroupId, createdAt);
     }
 }
