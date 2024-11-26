@@ -1,10 +1,11 @@
 package dev.flab.studytogether.domain.studygroup.service;
 
-import dev.flab.studytogether.domain.event.EventPublish;
-import dev.flab.studytogether.domain.event.infrastructure.eventListener.StudyGroupCreatedEventListenerImpl;
-import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
-import dev.flab.studytogether.domain.studygroup.event.StudyGroupCreatedEvent;
-import dev.flab.studytogether.domain.studygroup.repository.StudyGroupRepository;
+import dev.flab.studytogether.core.domain.studygroup.service.StudyGroupCreateService;
+import dev.flab.studytogether.core.domain.event.EventPublish;
+import dev.flab.studytogether.infra.event.eventListener.StudyGroupCreatedEventListenerImpl;
+import dev.flab.studytogether.core.domain.studygroup.entity.StudyGroup;
+import dev.flab.studytogether.core.domain.studygroup.event.StudyGroupCreatedEvent;
+import dev.flab.studytogether.core.domain.studygroup.repository.StudyGroupRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

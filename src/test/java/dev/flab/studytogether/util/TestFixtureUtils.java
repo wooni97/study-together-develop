@@ -1,9 +1,9 @@
 package dev.flab.studytogether.util;
 
-import dev.flab.studytogether.domain.member.entity.MemberV2;
-import dev.flab.studytogether.domain.room.entity.ActivateStatus;
-import dev.flab.studytogether.domain.studygroup.entity.ParticipantV2;
-import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
+import dev.flab.studytogether.core.domain.member.entity.MemberV2;
+import dev.flab.studytogether.core.domain.room.entity.ActivateStatus;
+import dev.flab.studytogether.core.domain.studygroup.entity.ParticipantV2;
+import dev.flab.studytogether.core.domain.studygroup.entity.StudyGroup;
 
 import java.time.LocalDateTime;
 

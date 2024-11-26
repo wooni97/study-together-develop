@@ -2,9 +2,10 @@ package dev.flab.studytogether.domain.member.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.flab.studytogether.domain.member.dto.MemberCreateRequestDto;
-import dev.flab.studytogether.domain.member.entity.Member;
-import dev.flab.studytogether.domain.member.service.MemberService;
+import dev.flab.studytogether.api.controller.MemberAPIController;
+import dev.flab.studytogether.api.dto.MemberCreateRequestDto;
+import dev.flab.studytogether.core.domain.member.entity.Member;
+import dev.flab.studytogether.core.domain.member.service.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

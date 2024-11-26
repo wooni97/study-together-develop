@@ -2,10 +2,11 @@ package dev.flab.studytogether.domain.member.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import dev.flab.studytogether.domain.member.entity.Member;
-import dev.flab.studytogether.domain.member.exception.MemberNotFoundException;
-import dev.flab.studytogether.domain.member.exception.PasswordMismatchException;
-import dev.flab.studytogether.domain.member.repository.MemberRepository;
+import dev.flab.studytogether.core.domain.member.entity.Member;
+import dev.flab.studytogether.core.domain.member.exception.MemberNotFoundException;
+import dev.flab.studytogether.core.domain.member.exception.PasswordMismatchException;
+import dev.flab.studytogether.core.domain.member.service.MemberService;
+import dev.flab.studytogether.core.domain.member.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

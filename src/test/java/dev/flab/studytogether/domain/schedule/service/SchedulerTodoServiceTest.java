@@ -1,9 +1,10 @@
 package dev.flab.studytogether.domain.schedule.service;
 
-import dev.flab.studytogether.domain.schedule.dto.SchedulerTodoDto;
-import dev.flab.studytogether.domain.schedule.entity.Scheduler;
-import dev.flab.studytogether.domain.schedule.entity.Todo;
-import dev.flab.studytogether.enums.CompleteStatus;
+import dev.flab.studytogether.core.domain.studygroup.service.SchedulerTodoService;
+import dev.flab.studytogether.api.dto.SchedulerTodoDto;
+import dev.flab.studytogether.core.domain.schedule.entity.Scheduler;
+import dev.flab.studytogether.core.domain.schedule.entity.Todo;
+import dev.flab.studytogether.core.domain.schedule.CompleteStatus;
 import dev.flab.studytogether.fakerepositories.FakeSchedulerRepository;
 import dev.flab.studytogether.fakerepositories.FakeTodoRepository;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,10 +1,11 @@
 package dev.flab.studytogether.domain.studygroup.service;
 
-import dev.flab.studytogether.domain.event.EventRepository;
-import dev.flab.studytogether.domain.studygroup.entity.StudyGroup;
-import dev.flab.studytogether.domain.studygroup.exception.ParticipantWithMemberIdNotFoundInGroupException;
-import dev.flab.studytogether.domain.studygroup.exception.StudyGroupNotFoundException;
-import dev.flab.studytogether.domain.studygroup.repository.StudyGroupRepository;
+import dev.flab.studytogether.core.domain.studygroup.service.StudyGroupExitProcessStartService;
+import dev.flab.studytogether.core.domain.event.EventRepository;
+import dev.flab.studytogether.core.domain.studygroup.entity.StudyGroup;
+import dev.flab.studytogether.core.domain.studygroup.exception.ParticipantWithMemberIdNotFoundInGroupException;
+import dev.flab.studytogether.core.domain.studygroup.exception.StudyGroupNotFoundException;
+import dev.flab.studytogether.core.domain.studygroup.repository.StudyGroupRepository;
 import dev.flab.studytogether.util.TestFixtureUtils;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

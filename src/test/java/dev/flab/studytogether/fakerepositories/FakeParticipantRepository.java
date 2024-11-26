@@ -1,6 +1,6 @@
 package dev.flab.studytogether.fakerepositories;
 
-import dev.flab.studytogether.domain.room.entity.Participant;
+import dev.flab.studytogether.core.domain.room.entity.Participant;
 import dev.flab.studytogether.domain.room.repository.ParticipantRepository;
 
 import java.util.ArrayList;

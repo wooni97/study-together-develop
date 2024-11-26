@@ -3,7 +3,9 @@ package dev.flab.studytogether.domain.member.repository;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import dev.flab.studytogether.domain.member.entity.Member;
+import dev.flab.studytogether.core.domain.member.entity.Member;
+import dev.flab.studytogether.core.domain.member.repository.MemberRepository;
+import dev.flab.studytogether.infra.repository.member.MemberRepositoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;

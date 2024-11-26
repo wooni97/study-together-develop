@@ -9,7 +9,8 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://180.67.148.118:3306/STUDY_TOGETHER?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    #url: jdbc:mysql://180.67.148.118:3306/STUDY_TOGETHER?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/STUDY_TOGETHER?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
     username : root
     password : root123!new
 

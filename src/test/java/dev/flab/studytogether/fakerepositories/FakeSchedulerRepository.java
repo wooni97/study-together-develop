@@ -1,7 +1,7 @@
 package dev.flab.studytogether.fakerepositories;
 
-import dev.flab.studytogether.domain.schedule.entity.Scheduler;
-import dev.flab.studytogether.domain.schedule.repository.SchedulerRepository;
+import dev.flab.studytogether.core.domain.schedule.entity.Scheduler;
+import dev.flab.studytogether.core.domain.schedule.repository.SchedulerRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

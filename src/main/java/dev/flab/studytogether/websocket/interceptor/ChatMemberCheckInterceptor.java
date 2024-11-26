@@ -1,8 +1,8 @@
 package dev.flab.studytogether.websocket.interceptor;
 
-import dev.flab.studytogether.domain.chat.exception.ChatNotFoundException;
-import dev.flab.studytogether.domain.chat.exception.MemberNotFoundInChatException;
-import dev.flab.studytogether.domain.chat.service.ChatValidationService;
+import dev.flab.studytogether.core.domain.chat.exception.ChatNotFoundException;
+import dev.flab.studytogether.core.domain.chat.exception.MemberNotFoundInChatException;
+import dev.flab.studytogether.core.domain.chat.service.ChatValidationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -61,6 +61,4 @@ public class ChatMemberCheckInterceptor implements HandshakeInterceptor {
             log.info("Handshake succeeded for URI : {}", request.getURI());
         }
     }
-
-
 }
