@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class StudyGroupChatJpaRepositoryImpl implements StudyGroupChatRepository {
+public class StudyGroupChatRepositoryImpl implements StudyGroupChatRepository {
     private final StudyGroupChatJpaRepository studyGroupChatJpaRepository;
 
-    public StudyGroupChatJpaRepositoryImpl(StudyGroupChatJpaRepository studyGroupChatJpaRepository) {
+    public StudyGroupChatRepositoryImpl(StudyGroupChatJpaRepository studyGroupChatJpaRepository) {
         this.studyGroupChatJpaRepository = studyGroupChatJpaRepository;
     }
 
