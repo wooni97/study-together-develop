@@ -1,6 +1,7 @@
 package dev.flab.studytogether.core.domain.notification.service;
 
 import dev.flab.studytogether.core.domain.notification.AbstractNotificationData;
+import dev.flab.studytogether.core.domain.notification.exception.UnsupportedNotificationDataException;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -27,7 +28,9 @@ public class NotificationService {
         NotificationSender notificationSender = senderMap.get(notificationData.getClass());
 
         if(notificationSender == null) {
-            throw new IllegalArgumentException("");
+            throw new UnsupportedNotificationDataException(
+                    "No sender found for notification data type: " + notificationData.getClass().getName()
+            );
         }
 
         notificationSender.send(notificationData);
