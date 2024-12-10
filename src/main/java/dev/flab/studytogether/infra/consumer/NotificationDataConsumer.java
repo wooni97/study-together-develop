@@ -34,9 +34,6 @@ public class NotificationDataConsumer {
 
         for(NotificationDto notificationDto : notificationDtos) {
             AbstractNotificationData notificationData = notificationDto.getNotificationData();
-            if(notificationData.isScheduled())
-                continue;
-
             try {
                 notificationService.send(notificationData);
                 ids.add(notificationDto.getId());
