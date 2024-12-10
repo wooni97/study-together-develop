@@ -2,8 +2,6 @@ package dev.flab.studytogether.core.domain.notification;
 
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
 @Getter
 public class MailNotificationData extends AbstractNotificationData {
 
@@ -11,10 +9,10 @@ public class MailNotificationData extends AbstractNotificationData {
     private final String recipientEmailAddress;
 
     public MailNotificationData(String notificationMessageContent,
-                                LocalDateTime scheduledAt,
+                                Long memberId,
                                 String subject,
                                 String recipientEmailAddress) {
-        super(notificationMessageContent, scheduledAt);
+        super(notificationMessageContent, memberId);
         this.subject = subject;
         this.recipientEmailAddress = recipientEmailAddress;
     }
