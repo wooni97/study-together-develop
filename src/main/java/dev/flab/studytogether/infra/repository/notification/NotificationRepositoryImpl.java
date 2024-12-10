@@ -31,13 +31,13 @@ public class NotificationRepositoryImpl implements NotificationRepository {
         try {
             payload = objectMapper.writeValueAsString(notificationData);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e.getMessage());
         }
 
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("NOTIFICATION_TYPE", notificationData.getClass().getName());
-        parameters.put("SCHEDULED_AT", notificationData.getScheduledAt());
-        parameters.put("PAYLOAD", payload);
+        parameters.put("notification_type", notificationData.getClass().getName());
+        parameters.put("notified_member_id", notificationData.getNotifiedMemberId());
+        parameters.put("payload", payload);
 
         jdbcInsert.execute(parameters);
 
