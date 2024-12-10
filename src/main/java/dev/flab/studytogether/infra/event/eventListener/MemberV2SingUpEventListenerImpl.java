@@ -4,7 +4,7 @@ import dev.flab.studytogether.core.domain.event.EventListener;
 import dev.flab.studytogether.core.domain.member.event.MemberV2SignUpEvent;
 import dev.flab.studytogether.core.domain.notification.AbstractNotificationData;
 import dev.flab.studytogether.core.domain.notification.MailNotificationData;
-import dev.flab.studytogether.core.domain.notification.repository.NotificationRepository;
+import dev.flab.studytogether.core.domain.notification.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberV2SingUpEventListenerImpl implements EventListener<MemberV2SignUpEvent> {
 
-    private final NotificationRepository notificationRepository;
+    private final NotificationService notificationService;
 
     @Override
     @org.springframework.context.event.EventListener(MemberV2SignUpEvent.class)
@@ -30,7 +30,7 @@ public class MemberV2SingUpEventListenerImpl implements EventListener<MemberV2Si
 
         AbstractNotificationData mailNotification =
                 new MailNotificationData(content, null, subject, event.getUserEmail());
-        notificationRepository.save(mailNotification);
+        notificationService.send(mailNotification);
     }
 
 }
