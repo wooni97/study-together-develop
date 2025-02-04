@@ -47,7 +47,7 @@
 
 **✔️ JPA 도입 과정** 
 
-**`목표: 단순 JPA의 편리함에 치중한 것이 아닌, 내부 동작 이해 및 성능에 관한 고민`**
+목표: 단순 JPA의 편리함에 치중한 것이 아닌, 내부 동작 이해 및 성능에 관한 고민
 
 - [JpaRepository.save() 안티패턴에 대한 고찰](https://dev-wooni.tistory.com/9)
 
@@ -56,18 +56,20 @@
 - [다양한 구조로 변경 가능한 Repository 만들기](https://dev-wooni.tistory.com/11)
 
 
+
 **✔️ Event-Driven Architecture**
 
-**`목표: 변경사항에 유연한 시스템 만들기`**
+목표: 변경사항에 유연한 시스템 만들기
 
 - [EDA 도입 이유 및 Transactional Outbox 패턴을 통한 메시지 발행 보장](https://dev-wooni.tistory.com/13)
 
 - [Event 확장성 고민, 추상화로 해결하기 : 이벤트 동적 매핑 하는 방법](https://dev-wooni.tistory.com/14)
 
 
+
 **✔️ 동시성 제어**
 
-**`목표 : 무조건적인 대규모 트래픽에 대비한 동시성 제어가 아닌, 현재 프로젝트 규모를 예측하고 오버 엔지니어링 하지 않는 제어 기법 찾기.`**
+목표 : 무조건적인 대규모 트래픽에 대비한 동시성 제어가 아닌, 현재 프로젝트 규모를 예측하고 오버 엔지니어링 하지 않는 제어 기법 찾기.
 
 - [DB 락 vs Redis vs 비동기, 동시성 제어 점진적 개선기](https://dev-wooni.tistory.com/29)
   
