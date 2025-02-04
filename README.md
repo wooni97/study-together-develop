@@ -69,11 +69,8 @@
 
 **`목표 : 무조건적인 대규모 트래픽에 대비한 동시성 제어가 아닌, 현재 프로젝트 규모를 예측하고 오버 엔지니어링 하지 않는 제어 기법 찾기.`**
 
-**`과정`**
-- DB Lock, Redis 분산락의 성능 저하 문제
+- [DB 락 vs Redis vs 비동기, 동시성 제어 점진적 개선기](https://dev-wooni.tistory.com/29)
   
-**`최종 엔지니어링 결과`**
-- [Event 기반 요청 처리 순서 보장](https://github.com/wooni97/study-together-develop/pull/21)
 ---
 ### 예상 UI
 ![study together ui-1](https://github.com/user-attachments/assets/20e21201-660a-4f27-8969-4fe769f659cf)
